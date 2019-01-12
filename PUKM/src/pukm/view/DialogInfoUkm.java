@@ -15,7 +15,7 @@ import javax.swing.ImageIcon;
 public class DialogInfoUkm extends javax.swing.JDialog {
 
     /**
-     * Creates new form DialogInfoUkm
+     * Creates new form DialogInfoUkmnn
      */
     public DialogInfoUkm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
