@@ -37,13 +37,13 @@ public class FormMainDasboard extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        mnExit = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         mnAbout = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
+        loginAdmin = new javax.swing.JMenuItem();
+        loginBendahara = new javax.swing.JMenuItem();
+        loginSekretaris = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -120,13 +120,13 @@ public class FormMainDasboard extends javax.swing.JFrame {
 
         jMenu1.setText("File");
 
-        jMenuItem1.setText("Exit");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        mnExit.setText("Exit");
+        mnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                mnExitActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        jMenu1.add(mnExit);
 
         jMenuBar1.add(jMenu1);
 
@@ -144,14 +144,14 @@ public class FormMainDasboard extends javax.swing.JFrame {
 
         jMenu3.setText("Login");
 
-        jMenuItem3.setText("Login Admin");
-        jMenu3.add(jMenuItem3);
+        loginAdmin.setText("Login Admin");
+        jMenu3.add(loginAdmin);
 
-        jMenuItem4.setText("Login Bendahara");
-        jMenu3.add(jMenuItem4);
+        loginBendahara.setText("Login Bendahara");
+        jMenu3.add(loginBendahara);
 
-        jMenuItem5.setText("Login Seketaris");
-        jMenu3.add(jMenuItem5);
+        loginSekretaris.setText("Login Seketaris");
+        jMenu3.add(loginSekretaris);
 
         jMenuBar1.add(jMenu3);
 
@@ -196,9 +196,9 @@ public class FormMainDasboard extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void mnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnExitActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_mnExitActionPerformed
 
     private void mnAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnAboutActionPerformed
         DialogAbout da = new DialogAbout(this, rootPaneCheckingEnabled);
@@ -248,16 +248,16 @@ public class FormMainDasboard extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
+    private javax.swing.JMenuItem loginAdmin;
+    private javax.swing.JMenuItem loginBendahara;
+    private javax.swing.JMenuItem loginSekretaris;
     private javax.swing.JMenuItem mnAbout;
+    private javax.swing.JMenuItem mnExit;
     // End of variables declaration//GEN-END:variables
 }
