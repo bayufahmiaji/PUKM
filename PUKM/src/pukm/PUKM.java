@@ -5,6 +5,9 @@
  */
 package pukm;
 
+import java.sql.Connection;
+import pukm.connection.SqlConnection;
+
 /**
  *
  * @author Sammy Guergachi <sguergachi at gmail.com>
@@ -16,7 +19,7 @@ public class PUKM {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here by andika ganteng
+        Connection con = SqlConnection.getConnection();
     }
     
 }
