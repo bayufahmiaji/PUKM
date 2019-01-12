@@ -12,7 +12,7 @@ package pukm.view;
 public class FormMainUKM extends javax.swing.JFrame {
 
     /**
-     * Creates new form FormMainUKM
+     * Creates new form FormMainUKMjjjjjjj
      */
     public FormMainUKM() {
         initComponents();
