@@ -39,7 +39,7 @@ public class FormMainDasboard extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        mnAbout = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
@@ -78,7 +78,8 @@ public class FormMainDasboard extends javax.swing.JFrame {
                 .addGap(155, 155, 155))
         );
 
-        jLabel1.setText("Saldo UKM");
+        jLabel1.setFont(new java.awt.Font("Yu Mincho", 1, 18)); // NOI18N
+        jLabel1.setText("Saldo UKM Terbaru");
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -106,7 +107,7 @@ public class FormMainDasboard extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 136, Short.MAX_VALUE)
+            .addGap(0, 146, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -114,7 +115,8 @@ public class FormMainDasboard extends javax.swing.JFrame {
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
-        jLabel2.setText("Anggota Baru");
+        jLabel2.setFont(new java.awt.Font("Yu Mincho", 1, 18)); // NOI18N
+        jLabel2.setText("Anggota Baru Terbaru");
 
         jMenu1.setText("File");
 
@@ -130,8 +132,13 @@ public class FormMainDasboard extends javax.swing.JFrame {
 
         jMenu2.setText("Help");
 
-        jMenuItem2.setText("About");
-        jMenu2.add(jMenuItem2);
+        mnAbout.setText("About");
+        mnAbout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnAboutActionPerformed(evt);
+            }
+        });
+        jMenu2.add(mnAbout);
 
         jMenuBar1.add(jMenu2);
 
@@ -193,6 +200,11 @@ public class FormMainDasboard extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void mnAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnAboutActionPerformed
+        DialogAbout da = new DialogAbout(this, rootPaneCheckingEnabled);
+        da.setVisible(true);
+    }//GEN-LAST:event_mnAboutActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -237,7 +249,6 @@ public class FormMainDasboard extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
@@ -247,5 +258,6 @@ public class FormMainDasboard extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
+    private javax.swing.JMenuItem mnAbout;
     // End of variables declaration//GEN-END:variables
 }

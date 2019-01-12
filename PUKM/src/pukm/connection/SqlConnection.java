@@ -12,7 +12,7 @@ import java.sql.SQLException;
 
 /**
  * 
- * @author Sammy Guergachi <sguergachi at gmail.com>
+ * @author <maxteroit> Aditya
  */
 public class SqlConnection {
     private static Connection conn = null;
