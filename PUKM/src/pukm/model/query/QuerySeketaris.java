@@ -54,14 +54,14 @@ public class QuerySeketaris implements InterfacesSeketaris{
     public boolean update(Seketaris seketaris) {
         String sql="update sekertaris set id_ukm =?, nama_sekertaris=?, username=?, "
                 + "password=? where id_sekertaris=?";
+        
         try{
             PreparedStatement statement= conn.prepareStatement(sql);
             statement.setInt(1, seketaris.getId_ukm());
             statement.setString(2, seketaris.getNama_seketaris());
             statement.setString(3, seketaris.getUsername());
             statement.setString(4, seketaris.getPassword());
-            statement.setInt(5, seketaris.getId_seketaris());
-            
+            statement.setInt(5, seketaris.getId_seketaris());            
             int row= statement.executeUpdate();
             if(row>0){
                 return true;
