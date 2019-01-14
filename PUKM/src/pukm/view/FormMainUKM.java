@@ -5,17 +5,26 @@
  */
 package pukm.view;
 
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import pukm.controller.ControllerUkm;
+import pukm.model.Ukm;
+
 /**
  *
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
 public class FormMainUKM extends javax.swing.JFrame {
-
+    private final ControllerUkm controllerUkm = new ControllerUkm();
+    
+    
     /**
      * Creates new form FormMainUKMjjjjjjj
      */
     public FormMainUKM() {
         initComponents();
+        setTableUKM(controllerUkm.getallData());
     }
 
     /**
@@ -27,25 +36,34 @@ public class FormMainUKM extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        popupukm = new javax.swing.JPopupMenu();
+        mnDelete = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtIdUkm = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txtNamaUkm = new javax.swing.JTextField();
-        txtJumlahAnggota = new javax.swing.JTextField();
         txtSaldoUkm = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblUkm = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnsave = new javax.swing.JButton();
+        btnclear = new javax.swing.JButton();
+        btnclose = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        lblOutput = new javax.swing.JLabel();
+
+        mnDelete.setText("Delete Item");
+        mnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnDeleteActionPerformed(evt);
+            }
+        });
+        popupukm.add(mnDelete);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -54,8 +72,6 @@ public class FormMainUKM extends javax.swing.JFrame {
         jLabel1.setText("ID UKM");
 
         jLabel2.setText("Nama UKM");
-
-        jLabel3.setText("Jumlah Anggota");
 
         jLabel4.setText("Saldo UKM");
 
@@ -75,13 +91,9 @@ public class FormMainUKM extends javax.swing.JFrame {
                             .addComponent(txtNamaUkm, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
                             .addComponent(txtIdUkm)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtJumlahAnggota)
-                            .addComponent(txtSaldoUkm))))
+                        .addComponent(jLabel4)
+                        .addGap(45, 45, 45)
+                        .addComponent(txtSaldoUkm)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -97,13 +109,9 @@ public class FormMainUKM extends javax.swing.JFrame {
                     .addComponent(txtNamaUkm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(txtJumlahAnggota, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
                     .addComponent(txtSaldoUkm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -119,6 +127,14 @@ public class FormMainUKM extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tblUkm.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tblUkmMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tblUkmMouseReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblUkm);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -127,7 +143,7 @@ public class FormMainUKM extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 643, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -142,16 +158,26 @@ public class FormMainUKM extends javax.swing.JFrame {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        jButton1.setText("Save");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnsave.setText("Save");
+        btnsave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnsaveActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Clear");
+        btnclear.setText("Clear");
+        btnclear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnclearActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Close");
+        btnclose.setText("Close");
+        btnclose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btncloseActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -160,26 +186,29 @@ public class FormMainUKM extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE))
+                    .addComponent(btnsave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnclear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnclose, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addComponent(jButton1)
+                .addComponent(btnsave)
                 .addGap(30, 30, 30)
-                .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton3)
+                .addComponent(btnclear)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addComponent(btnclose)
                 .addGap(17, 17, 17))
         );
 
         jLabel6.setText("Action");
 
         jLabel7.setText("Field UKM");
+
+        lblOutput.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblOutput.setText("READY");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -205,6 +234,10 @@ public class FormMainUKM extends javax.swing.JFrame {
                                         .addGap(0, 0, Short.MAX_VALUE))
                                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addContainerGap())))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblOutput)
+                .addGap(308, 308, 308))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -221,19 +254,121 @@ public class FormMainUKM extends javax.swing.JFrame {
                 .addComponent(jLabel5)
                 .addGap(7, 7, 7)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblOutput)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnsaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsaveActionPerformed
+        int id_ukm = Integer.parseInt(txtIdUkm.getText());
+        String nama_ukm = txtNamaUkm.getText();
+        int saldo_ukm = Integer.parseInt(txtSaldoUkm.getText());
+       
+        Ukm data = new Ukm(id_ukm, nama_ukm, saldo_ukm);
 
-    /**
-     * @param args the command line arguments
-     */
+        //input data ke database
+        if(btnsave.getText().equals("Save")){
+            if(controllerUkm.InsertUkm(data)){
+                lblOutput.setText("Insert Berhasil");
+            }else{
+                lblOutput.setText("Insert Gagal");
+            }
+        }else{
+            //update data di database
+            if(controllerUkm.UpdateUkm(data)){
+                lblOutput.setText("Update Berhasil");
+            }else{
+                lblOutput.setText("Upate Gagal");
+            }
+        }
+        setClear();
+    }//GEN-LAST:event_btnsaveActionPerformed
+
+    private void btnclearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnclearActionPerformed
+        setClear();
+    }//GEN-LAST:event_btnclearActionPerformed
+
+    private void btncloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncloseActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btncloseActionPerformed
+
+    private void tblUkmMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUkmMousePressed
+        //menampilkan record di textfield
+        
+        if(evt.getClickCount()==2){
+            int idxrow = tblUkm.getSelectedRow();
+            txtIdUkm.setText(tblUkm.getModel().getValueAt(idxrow, 0).toString());
+            txtNamaUkm.setText(tblUkm.getModel().getValueAt(idxrow, 1).toString());
+            txtSaldoUkm.setText(tblUkm.getModel().getValueAt(idxrow, 2).toString());
+            btnsave.setText("Update");
+        }
+        if(evt.isPopupTrigger()){
+            popupukm.show(tblUkm, evt.getX(), evt.getY());
+        }
+    }//GEN-LAST:event_tblUkmMousePressed
+
+    private void tblUkmMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUkmMouseReleased
+        //menampilkan record di textfield
+        
+        if(evt.getClickCount()==2){
+            int idxrow = tblUkm.getSelectedRow();
+            txtIdUkm.setText(tblUkm.getModel().getValueAt(idxrow, 0).toString());
+            txtNamaUkm.setText(tblUkm.getModel().getValueAt(idxrow, 1).toString());
+            txtSaldoUkm.setText(tblUkm.getModel().getValueAt(idxrow, 2).toString());
+            btnsave.setText("Update");
+        }
+        if(evt.isPopupTrigger()){
+            popupukm.show(tblUkm, evt.getX(), evt.getY());
+        }
+    }//GEN-LAST:event_tblUkmMouseReleased
+
+    private void mnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnDeleteActionPerformed
+        //delete record di database 
+        
+        int result = JOptionPane.showConfirmDialog(rootPane, "Apakah Yakin Untuk Didelete?","Delete Dialog",JOptionPane.YES_NO_OPTION);
+        if(result == JOptionPane.YES_OPTION){
+            int id = Integer.parseInt(tblUkm.getModel().getValueAt(tblUkm.getSelectedRow(), 0).toString());
+            controllerUkm.Deleteukm(id);
+            setClear();
+        }
+    }//GEN-LAST:event_mnDeleteActionPerformed
+
+   private void setTableUKM(List<Ukm> listUKm){
+        if(listUKm==null){
+            JOptionPane.showMessageDialog(this,"Data Karyawan Gagal Diambil Dari Database",
+                    "DATABASE FAILED",JOptionPane.ERROR_MESSAGE);
+        }else{
+            //setting table admin
+            DefaultTableModel tableModel = new DefaultTableModel();
+            tableModel.setColumnIdentifiers(new String[]{
+                "Id UKM",
+                "Nama UKM",
+                "Saldo UKM"
+            });
+            
+            //mengambil data untuk table admin
+            for(Ukm a : listUKm){
+                Object[] o = new Object[3];
+                o[0] = a.getId_ukm();
+                o[1] = a.getNama_ukm();
+                o[2] = a.getSaldo_ukm();
+                tableModel.addRow(o);
+        }
+            tblUkm.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+            tblUkm.setModel(tableModel);
+    }
+    }
+   
+   public void setClear(){
+       //menghapus record pada frame
+       txtIdUkm.setText("");
+       txtNamaUkm.setText("");
+       txtSaldoUkm.setText("");
+       setTableUKM(controllerUkm.getallData());
+   }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -267,12 +402,11 @@ public class FormMainUKM extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btnclear;
+    private javax.swing.JButton btnclose;
+    private javax.swing.JButton btnsave;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -281,9 +415,11 @@ public class FormMainUKM extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblOutput;
+    private javax.swing.JMenuItem mnDelete;
+    private javax.swing.JPopupMenu popupukm;
     private javax.swing.JTable tblUkm;
     private javax.swing.JTextField txtIdUkm;
-    private javax.swing.JTextField txtJumlahAnggota;
     private javax.swing.JTextField txtNamaUkm;
     private javax.swing.JTextField txtSaldoUkm;
     // End of variables declaration//GEN-END:variables

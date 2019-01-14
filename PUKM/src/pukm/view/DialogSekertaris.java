@@ -158,7 +158,7 @@ public class DialogSekertaris extends javax.swing.JDialog {
         });
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel8.setText("READY...!!!");
+        jLabel8.setText("READY");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -190,7 +190,7 @@ public class DialogSekertaris extends javax.swing.JDialog {
                                 .addComponent(jLabel6)))
                         .addGap(48, 48, 48))))
             .addGroup(layout.createSequentialGroup()
-                .addGap(284, 284, 284)
+                .addGap(305, 305, 305)
                 .addComponent(jLabel8)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
