@@ -6,10 +6,13 @@
 package pukm.view;
 
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import pukm.controller.ControllerBendahara;
+import pukm.controller.ControllerUkm;
 import pukm.model.Bendahara;
+import pukm.model.Ukm;
 
 /**
  *
@@ -18,7 +21,7 @@ import pukm.model.Bendahara;
 public class DialogBendahara extends javax.swing.JDialog {
     
     ControllerBendahara cb= new ControllerBendahara();
-
+     ControllerUkm ukm= new ControllerUkm();
     /**
      * Creates new form DialogBendahara
      */
@@ -26,6 +29,7 @@ public class DialogBendahara extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setTableBendahara(cb.getAllBendahara());
+        setCbxUkm(ukm.getallData());
     }
 
     /**
@@ -308,15 +312,27 @@ public class DialogBendahara extends javax.swing.JDialog {
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
         int id_bendahara= Integer.parseInt(txtIdBendahara.getText().toString());
-        int id_ukm=Integer.parseInt(cbxUkm.getSelectedItem().toString());
+        String id_ukm=cbxUkm.getSelectedItem().toString();
         String nama_bendahara=txtNamaBendahara.getText();
         String username=txtUsername.getText();
         String password=txtPassword.getText();
-
-        Bendahara bendahara= new Bendahara(id_bendahara, id_ukm, nama_bendahara,
+        
+        char [] x= new char[1];
+        
+        for(int c=0;c<id_ukm.length();c++){
+            if(id_ukm.charAt(c)!='-'){
+                x[c]=id_ukm.charAt(c);
+            }
+            else{
+                break;
+            }
+        }
+        
+        int idukm=Integer.parseInt(new String(x));
+        Bendahara bendahara= new Bendahara(id_bendahara, idukm, nama_bendahara,
             username, password);
 
-        if(btnSave.equals("Save")){
+        if(btnSave.getText().equals("Save")){
             if(cb.insertBendahara(bendahara)){
                 lbResult.setText("Saved");
             }else{
@@ -369,6 +385,16 @@ public class DialogBendahara extends javax.swing.JDialog {
             tblBendahara.setModel(model);
             
         }
+    }
+    
+    private void setCbxUkm(List<Ukm> listUkm){
+        
+        DefaultComboBoxModel boxModel= new DefaultComboBoxModel();
+        for(Ukm u:listUkm){
+            boxModel.addElement(u.id_ukm +"-"+u.nama_ukm);
+        }
+        cbxUkm.setModel(boxModel);
+        
     }
     
     public void clear(){

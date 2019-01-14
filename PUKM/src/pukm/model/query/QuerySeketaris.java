@@ -52,8 +52,8 @@ public class QuerySeketaris implements InterfacesSeketaris{
 
     @Override
     public boolean update(Seketaris seketaris) {
-        String sql="update sekertaris set id_ukm = ?,nama_sekertaris=? , username=? , "
-                + "password=?, where id_sekertaris=?";
+        String sql="update sekertaris set id_ukm =?, nama_sekertaris=?, username=?, "
+                + "password=? where id_sekertaris=?";
         try{
             PreparedStatement statement= conn.prepareStatement(sql);
             statement.setInt(1, seketaris.getId_ukm());

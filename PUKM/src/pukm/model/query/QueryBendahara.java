@@ -52,8 +52,8 @@ public class QueryBendahara implements InterfacesBendahara {
 
     @Override
     public boolean update(Bendahara bendahara) {
-        String sql="update bendahara set id_ukm = ?,nama_bendahara=? , username=? , "
-                + "password=?, where id_bendaharas=?";
+        String sql="update bendahara set id_ukm =?,nama_bendahara=?,username=?, "
+                + "password=? where id_bendahara=?";
         try{
             PreparedStatement statement= conn.prepareStatement(sql);
             statement.setInt(1, bendahara.getId_ukm());

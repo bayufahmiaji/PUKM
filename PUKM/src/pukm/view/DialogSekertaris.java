@@ -10,7 +10,9 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import pukm.controller.ControllerSeketaris;
+import pukm.controller.ControllerUkm;
 import pukm.model.Seketaris;
+import pukm.model.Ukm;
 import pukm.model.query.QueryBendahara;
 
 /**
@@ -20,6 +22,7 @@ import pukm.model.query.QueryBendahara;
 public class DialogSekertaris extends javax.swing.JDialog {
     
      ControllerSeketaris cs= new ControllerSeketaris();
+     ControllerUkm ukm= new ControllerUkm();
     //test
     QueryBendahara qb= new QueryBendahara();
 
@@ -30,6 +33,7 @@ public class DialogSekertaris extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setDataSeketaris(cs.getAllSeketaris());
+        setCbxUkm(ukm.getallData());
     }
 
     /**
@@ -276,29 +280,46 @@ public class DialogSekertaris extends javax.swing.JDialog {
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
         int  id_sekertaris=Integer.parseInt(txtIdSekertaris.getText());
-        int  id_ukm=Integer.parseInt(cbxidUkm.getSelectedItem().toString());
+        String  id_ukm=cbxidUkm.getSelectedItem().toString();
         String nama_sekertaris=txtNamaSekertaris.getText();
         String user=txtUser.getText();
         String password=txtPassword.getText();
+        
+        char [] x= new char[1];
+        
+        for(int c=0;c<id_ukm.length();c++){
+            if(id_ukm.charAt(c)!='-'){
+                x[c]=id_ukm.charAt(c);
+            }
+            else{
+                break;
+            }
+        }
+        
+        int idUkm=Integer.parseInt(new String(x));
 
-        Seketaris s= new Seketaris(id_sekertaris, id_ukm, nama_sekertaris, user, password);
+        Seketaris s= new Seketaris(id_sekertaris, idUkm, nama_sekertaris, user, password);
 
-        if(btnSave.equals("Save")){
+        if(btnSave.getText().equals("Save")){
             if(cs.insertSeketaris(s)){
                 lbReport.setText("Saved");
                 clear();
+                setDataSeketaris(cs.getAllSeketaris());
             }else{
                 lbReport.setText("Failed Saved");
+                setDataSeketaris(cs.getAllSeketaris());
             }
         }else{
             if(cs.updateSeketeris(s)){
                 lbReport.setText("Updated");
                 btnSave.setText("Save");
                 clear();
+                setDataSeketaris(cs.getAllSeketaris());
             }else{
                 lbReport.setText("Failed Update");
                 btnSave.setText("Save");
                 clear();
+                setDataSeketaris(cs.getAllSeketaris());
             }
         }
     }//GEN-LAST:event_btnSaveActionPerformed
@@ -319,15 +340,16 @@ public class DialogSekertaris extends javax.swing.JDialog {
             int row= tblSerketaris.getSelectedRow();
             String id_sekertaris=tblSerketaris.getModel().getValueAt(row, 0).toString();
             String nama_seketaris=tblSerketaris.getModel().getValueAt(row, 2).toString();
-            int indexUkm= Integer.parseInt(tblSerketaris.getModel().getValueAt(row, 1).toString());
+            int indexUkm= Integer.parseInt(tblSerketaris.getModel().getValueAt(row, 1).toString())-1;
             String user=tblSerketaris.getModel().getValueAt(row, 3).toString();
             String password=tblSerketaris.getModel().getValueAt(row, 4).toString();
+            btnSave.setText("Update");
 
             txtIdSekertaris.setText(id_sekertaris);
             txtNamaSekertaris.setText(nama_seketaris);
             txtUser.setText(user);
             txtPassword.setText(password);
-            cbxidUkm.setSelectedIndex(indexUkm);
+            //cbxidUkm.setSelectedIndex(indexUkm);
         }
         if(evt.isPopupTrigger()){
             popUpMenu.show(tblSerketaris,evt.getX(),evt.getY());
@@ -341,15 +363,16 @@ public class DialogSekertaris extends javax.swing.JDialog {
             int row= tblSerketaris.getSelectedRow();
             String id_sekertaris=tblSerketaris.getModel().getValueAt(row, 0).toString();
             String nama_seketaris=tblSerketaris.getModel().getValueAt(row, 2).toString();
-            int indexUkm= Integer.parseInt(tblSerketaris.getModel().getValueAt(row, 2).toString());
+            int indexUkm= Integer.parseInt(tblSerketaris.getModel().getValueAt(row, 1).toString())-1;
             String user=tblSerketaris.getModel().getValueAt(row, 3).toString();
             String password=tblSerketaris.getModel().getValueAt(row, 4).toString();
+            btnSave.setText("Update");
 
             txtIdSekertaris.setText(id_sekertaris);
             txtNamaSekertaris.setText(nama_seketaris);
             txtUser.setText(user);
             txtPassword.setText(password);
-            cbxidUkm.setSelectedIndex(indexUkm);
+            //cbxidUkm.setSelectedIndex(indexUkm);
         }
         if(evt.isPopupTrigger()){
             popUpMenu.show(tblSerketaris,evt.getX(),evt.getY());
@@ -388,12 +411,13 @@ public class DialogSekertaris extends javax.swing.JDialog {
         }
     }
     
-    private void setCbxUkm(List<QueryBendahara.ukm> listUkm){
+    private void setCbxUkm(List<Ukm> listUkm){
         
         DefaultComboBoxModel boxModel= new DefaultComboBoxModel();
-        //for(ukm u:listUkm){
-          //  boxModel.addElement();
-        //}
+        for(Ukm u:listUkm){
+            boxModel.addElement(u.id_ukm +"-"+u.nama_ukm);
+        }
+        cbxidUkm.setModel(boxModel);
         
     }
     
