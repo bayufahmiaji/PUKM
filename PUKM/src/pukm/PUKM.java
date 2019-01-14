@@ -7,6 +7,7 @@ package pukm;
 
 import java.sql.Connection;
 import pukm.connection.SqlConnection;
+import pukm.view.FormMainDasboard;
 
 /**
  *
@@ -20,6 +21,8 @@ public class PUKM {
      */
     public static void main(String[] args) {
         Connection con = SqlConnection.getConnection();
+        FormMainDasboard form = new FormMainDasboard();
+        form.setVisible(true);
     }
     
 }
