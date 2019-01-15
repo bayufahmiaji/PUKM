@@ -35,5 +35,10 @@ public class ControllerBendahara {
     
     public List<Bendahara> getAllBendaharaByName(String nama_bendahara){
     return qs.getAllDataByName(nama_bendahara);}
-
+    
+    public boolean cekLogin(String username,String password){
+    return qs.cekLogin(username, password);}
+    
+    public Bendahara getDataByUserBendahara(String user){
+    return qs.getDataBendaharabyUser(user);}
 }

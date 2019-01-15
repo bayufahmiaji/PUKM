@@ -108,7 +108,7 @@ public class QueryAdmin implements InterfaceAdmin{
 
     @Override
     public List<Admin> getallAdmin() {
-        List<Admin> listAdmin = new ArrayList<>();
+        List<Admin> listAdmin = new ArrayList<Admin>();
         String sql = "Select * from admin";
         try{
             if(SqlConnection.getConnection()==null){
@@ -135,15 +135,15 @@ public class QueryAdmin implements InterfaceAdmin{
 
     @Override
     public boolean benar(String username, String passsword) {
-     String sql = "select username, password where username like ? and password like ?";
+     String sql = "select username, password admin where username like "
+             + "'%"+username+"%' and password like '%"+passsword+"%'";
         try{
             if(SqlConnection.getConnection()==null){
                 return false;
             }else{
                 PreparedStatement statement = conn.prepareStatement(sql);
-                statement.setString(1, username);
-                statement.setString(2, passsword);
-                
+                //statement.setString(1, username);
+                //statement.setString(2, passsword);                
                 ResultSet rs = statement.executeQuery();
                 while(rs.next()){
                    return true;
@@ -154,6 +154,47 @@ public class QueryAdmin implements InterfaceAdmin{
         } catch (SQLException ex) {
             Logger.getLogger(QueryAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return false;
+    }
+    
+    public Admin getDataAdminId(String user) {
+        Admin admin = null;
+        String sql="select * from admin where username=?";
+        try{
+            PreparedStatement statement= conn.prepareStatement(sql);
+            statement.setString(1, user);
+            ResultSet rs=statement.executeQuery();
+            
+            while(rs.next()){
+                admin= new Admin(rs.getInt(1),rs.getString(2),rs.getString(3)
+                ,rs.getString(4));
+            }
+            statement.close();
+        }catch(SQLException e){
+            Logger.getLogger(Admin.class.getName()).log(Level.SEVERE,null,e);
+        }
+        
+        return admin;
+    }
+    
+    public boolean cekLogin(String username,String password) {
+        //Admin admin = null;
+        String sql="select nama_admin from admin where username=?"
+                + " and password=?";
+        try{
+            PreparedStatement statement= conn.prepareStatement(sql);
+            statement.setString(1, username);
+            statement.setString(2, password);
+            ResultSet rs=statement.executeQuery();
+            
+            while(rs.next()){
+                return true;
+            }
+            statement.close();
+        }catch(SQLException e){
+            Logger.getLogger(Admin.class.getName()).log(Level.SEVERE,null,e);
+        }
+        
         return false;
     }
     

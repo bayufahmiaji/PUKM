@@ -133,5 +133,24 @@ public class QueryUkm implements InterfaceUkm{
         }
         return listukm;
 }
+    public Ukm getDataUkmbyId(int id_ukm) {
+        Ukm ukm = null;
+        String sql="select * from ukm where id_ukm=?";
+        try{
+            PreparedStatement statement= conn.prepareStatement(sql);
+            statement.setInt(1, id_ukm);
+            ResultSet rs=statement.executeQuery();
+            
+            while(rs.next()){
+                ukm= new Ukm(rs.getInt(1),rs.getString(2),rs.getInt(3));
+            }
+            statement.close();
+        }catch(SQLException e){
+            Logger.getLogger(Ukm.class.getName()).log(Level.SEVERE,null,e);
+        }
+        
+        return ukm;
+    }
+    
     
 }

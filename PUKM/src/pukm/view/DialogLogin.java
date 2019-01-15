@@ -5,11 +5,26 @@
  */
 package pukm.view;
 
+import java.util.List;
+import javax.swing.JOptionPane;
+import pukm.controller.ControllerAdmin;
+import pukm.controller.ControllerBendahara;
+import pukm.controller.ControllerSeketaris;
+import pukm.controller.ControllerUkm;
+import pukm.model.Bendahara;
+import pukm.model.Seketaris;
+import pukm.model.Ukm;
+
 /**
  *
  * @author User
  */
 public class DialogLogin extends javax.swing.JDialog {
+    
+    ControllerAdmin controllerAdmin= new ControllerAdmin();
+    ControllerBendahara controllerBendahara= new ControllerBendahara();
+    ControllerSeketaris controllerSeketaris= new ControllerSeketaris();
+    ControllerUkm controllerUkm= new ControllerUkm();
 
     /**
      * Creates new form DialogLogin
@@ -56,6 +71,12 @@ public class DialogLogin extends javax.swing.JDialog {
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("Password");
+
+        txtUsername.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUsernameActionPerformed(evt);
+            }
+        });
 
         btnLogin.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnLogin.setText("Login");
@@ -146,7 +167,48 @@ public class DialogLogin extends javax.swing.JDialog {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
+        String username=txtUsername.getText();
+            String password=txtPassword.getText();
+        if(lblLogin.getText().equals("Login Admin")){
+            if(controllerAdmin.cekLlogin(username, password)){
+                controllerAdmin.getDataAdminById(username);
+                dispose();
+                new FormDashboardAdmin(username).setVisible(true);
+                //JOptionPane.showMessageDialog(this, "Benar..");
+            }else{
+                JOptionPane.showMessageDialog(this, "salah..");
+            }
+        }
+        else if(lblLogin.getText().equals("Login Sekertaris")){
+            if(controllerSeketaris.cekLogin(username, password)){
+                Seketaris seketaris= controllerSeketaris.getDataByUser(username);
+                Ukm ukm=controllerUkm.getDataUkmbyyID(seketaris.getId_ukm());
+                new FormDashboardSekertaris(seketaris.getUsername(), 
+                        Integer.toString(ukm.getId_ukm()), ukm.getNama_ukm()).setVisible(true);
+                dispose();
+                //JOptionPane.showMessageDialog(this, "Benar..");
+            }else{
+                JOptionPane.showMessageDialog(this, "salah..");
+            }
+        }
+        else if(lblLogin.getText().equals("Login Bendahara")){
+            if(controllerBendahara.cekLogin(username, password)){
+                Bendahara bendahara=controllerBendahara.getDataByUserBendahara(username);
+                Ukm ukm=controllerUkm.getDataUkmbyyID(bendahara.getId_ukm());
+                new FormDashboardBendahara(bendahara.getNama_bendahara(),
+                        Integer.toString(ukm.id_ukm),ukm.getNama_ukm()).setVisible(true);
+                dispose();
+                //JOptionPane.showMessageDialog(this, "Benar..");
+            }else{
+                JOptionPane.showMessageDialog(this, "salah..");
+            }
+        }
+        
     }//GEN-LAST:event_btnLoginActionPerformed
+
+    private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUsernameActionPerformed
 
     /**
      * @param args the command line arguments

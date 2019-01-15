@@ -35,4 +35,10 @@ public class ControllerSeketaris {
     
     public List<Seketaris> getAllSeketarisByName(String nama_seketaris){
     return qs.getAllDataByName(nama_seketaris);}
+    
+    public Seketaris getDataByUser(String user){
+    return qs.getDataSeketerisbyUser(user);}
+    
+    public boolean cekLogin(String username,String password){
+    return qs.cekLogin(username, password);}
 }

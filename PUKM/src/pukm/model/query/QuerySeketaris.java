@@ -165,6 +165,46 @@ public class QuerySeketaris implements InterfacesSeketaris{
        return listSekertaris;
     }
 
+    public boolean cekLogin(String username,String password){
+        //Seketaris seketaris= null;
+        String sql="select username,password from sekertaris where username=?"
+                + " and password=?";
+        try{
+            PreparedStatement statement= conn.prepareStatement(sql);
+            statement.setString(1, username);
+            statement.setString(2, password);
+            ResultSet rs=statement.executeQuery();
+            while(rs.next()){
+                return true;
+            }
+            statement.close();
+        }catch(SQLException e){
+            Logger.getLogger(Seketaris.class.getName()).log(Level.SEVERE, null,e);
+        }
+        return false;
+    }
     
+    public Seketaris getDataSeketerisbyUser(String user) {
+        Seketaris seketaris = null;
+        String sql="select * from sekertaris where username=?";
+        try{
+            PreparedStatement statement= conn.prepareStatement(sql);
+            statement.setString(1, user);
+            ResultSet rs=statement.executeQuery();
+            
+            while(rs.next()){
+                seketaris= new Seketaris(rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getString(3),
+                        rs.getString(4), 
+                        rs.getString(5));
+            }
+            statement.close();
+        }catch(SQLException e){
+            Logger.getLogger(Seketaris.class.getName()).log(Level.SEVERE,null,e);
+        }
+        
+        return seketaris;
+    }
 
 }

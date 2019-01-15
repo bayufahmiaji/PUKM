@@ -14,8 +14,11 @@ public class FormDashboardSekertaris extends javax.swing.JFrame {
     /**
      * Creates new form FormDashboardSekertaris
      */
-    public FormDashboardSekertaris() {
+    public FormDashboardSekertaris(String user,String id_ukm,String nama_ukm) {
         initComponents();
+        lbUserName.setText(user);
+        lbIdUkm.setText(id_ukm);
+        lbNamaUKM.setText(nama_ukm);
     }
 
     /**
@@ -35,9 +38,9 @@ public class FormDashboardSekertaris extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        lbUserName = new javax.swing.JLabel();
+        lbIdUkm = new javax.swing.JLabel();
+        lbNamaUKM = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -89,11 +92,11 @@ public class FormDashboardSekertaris extends javax.swing.JFrame {
 
         jLabel3.setText("Nama UKM :");
 
-        jLabel4.setText("jLabel4");
+        lbUserName.setText("jLabel4");
 
-        jLabel5.setText("jLabel5");
+        lbIdUkm.setText("jLabel5");
 
-        jLabel6.setText("jLabel6");
+        lbNamaUKM.setText("jLabel6");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -105,15 +108,15 @@ public class FormDashboardSekertaris extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel4))
+                        .addComponent(lbUserName))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel5))
+                        .addComponent(lbIdUkm))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel6)))
+                        .addComponent(lbNamaUKM)))
                 .addContainerGap(134, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -122,15 +125,15 @@ public class FormDashboardSekertaris extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel4))
+                    .addComponent(lbUserName))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel5))
+                    .addComponent(lbIdUkm))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel6))
+                    .addComponent(lbNamaUKM))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -209,7 +212,7 @@ public class FormDashboardSekertaris extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FormDashboardSekertaris().setVisible(true);
+                new FormDashboardSekertaris("user","id ukm","nama ukm").setVisible(true);
             }
         });
     }
@@ -218,9 +221,6 @@ public class FormDashboardSekertaris extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -228,6 +228,9 @@ public class FormDashboardSekertaris extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lbIdUkm;
+    private javax.swing.JLabel lbNamaUKM;
+    private javax.swing.JLabel lbUserName;
     private javax.swing.JMenuItem mnAnggota;
     private javax.swing.JTable tblSekertaris;
     // End of variables declaration//GEN-END:variables

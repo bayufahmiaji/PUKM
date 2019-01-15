@@ -36,5 +36,7 @@ public class ControllerUkm {
         return queryUkm.getallukUkmbyID(id_ukm);
     }
         
-        
+    public Ukm getDataUkmbyyID(int id_ukm){
+        return queryUkm.getDataUkmbyId(id_ukm);
+    }
 }

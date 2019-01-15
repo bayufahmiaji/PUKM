@@ -14,8 +14,11 @@ public class FormDashboardBendahara extends javax.swing.JFrame {
     /**
      * Creates new form FormDashboardSekertaris
      */
-    public FormDashboardBendahara() {
+    public FormDashboardBendahara(String user,String id_ukm,String nama_ukm) {
         initComponents();
+        lbUsername.setText(user);
+        lbIdUkm.setText(id_ukm);
+        lbNamaUkm.setText(nama_ukm);
     }
 
     /**
@@ -31,9 +34,9 @@ public class FormDashboardBendahara extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        lbUsername = new javax.swing.JLabel();
+        lbIdUkm = new javax.swing.JLabel();
+        lbNamaUkm = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblkasUKM = new javax.swing.JTable();
@@ -62,11 +65,11 @@ public class FormDashboardBendahara extends javax.swing.JFrame {
 
         jLabel3.setText("Nama UKM :");
 
-        jLabel4.setText("jLabel4");
+        lbUsername.setText("jLabel4");
 
-        jLabel5.setText("jLabel5");
+        lbIdUkm.setText("jLabel5");
 
-        jLabel6.setText("jLabel6");
+        lbNamaUkm.setText("jLabel6");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -78,15 +81,15 @@ public class FormDashboardBendahara extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel4))
+                        .addComponent(lbUsername))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel5))
+                        .addComponent(lbIdUkm))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel6)))
+                        .addComponent(lbNamaUkm)))
                 .addContainerGap(134, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -95,15 +98,15 @@ public class FormDashboardBendahara extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel4))
+                    .addComponent(lbUsername))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel5))
+                    .addComponent(lbIdUkm))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel6))
+                    .addComponent(lbNamaUkm))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -165,7 +168,7 @@ public class FormDashboardBendahara extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 521, Short.MAX_VALUE)
+                .addComponent(jScrollPane2)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -272,7 +275,7 @@ public class FormDashboardBendahara extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FormDashboardBendahara().setVisible(true);
+                new FormDashboardBendahara("user","id ukm","nama ukm").setVisible(true);
             }
         });
     }
@@ -281,9 +284,6 @@ public class FormDashboardBendahara extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -298,6 +298,9 @@ public class FormDashboardBendahara extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lbIdUkm;
+    private javax.swing.JLabel lbNamaUkm;
+    private javax.swing.JLabel lbUsername;
     private javax.swing.JMenuItem mnAnggota;
     private javax.swing.JTable tblKasAnggota;
     private javax.swing.JTable tblkasUKM;

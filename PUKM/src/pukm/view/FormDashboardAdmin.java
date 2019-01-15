@@ -14,8 +14,9 @@ public class FormDashboardAdmin extends javax.swing.JFrame {
     /**
      * Creates new form FormDashboardAdmin
      */
-    public FormDashboardAdmin() {
+    public FormDashboardAdmin(String user) {
         initComponents();
+        lbUser.setText(user);
     }
 
     /**
@@ -32,7 +33,7 @@ public class FormDashboardAdmin extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lbUser = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -81,7 +82,7 @@ public class FormDashboardAdmin extends javax.swing.JFrame {
 
         jLabel1.setText("Username : ");
 
-        jLabel2.setText("jLabel2");
+        lbUser.setText("jLabel2");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -91,7 +92,7 @@ public class FormDashboardAdmin extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
+                .addComponent(lbUser)
                 .addContainerGap(151, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -100,7 +101,7 @@ public class FormDashboardAdmin extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel2))
+                    .addComponent(lbUser))
                 .addContainerGap(40, Short.MAX_VALUE))
         );
 
@@ -217,14 +218,13 @@ public class FormDashboardAdmin extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FormDashboardAdmin().setVisible(true);
+                new FormDashboardAdmin("user").setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -237,5 +237,6 @@ public class FormDashboardAdmin extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lbUser;
     // End of variables declaration//GEN-END:variables
 }

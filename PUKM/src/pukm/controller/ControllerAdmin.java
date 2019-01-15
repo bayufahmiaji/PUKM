@@ -40,7 +40,13 @@ public class ControllerAdmin{
         return queryAdmin.benar(username, password);
     }
     
+    public Admin getDataAdminById(String user){
+        return queryAdmin.getDataAdminId(user);
+    }
     
+    public boolean cekLlogin(String username,String password){
+        return queryAdmin.cekLogin(username, password);
+    }
 
 
 }
