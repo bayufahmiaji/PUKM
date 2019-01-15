@@ -42,6 +42,7 @@ public class DialogBendahara extends javax.swing.JDialog {
     private void initComponents() {
 
         popUpMenu = new javax.swing.JPopupMenu();
+        delete = new javax.swing.JMenuItem();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -62,6 +63,14 @@ public class DialogBendahara extends javax.swing.JDialog {
         btnSave = new javax.swing.JButton();
         btnClear = new javax.swing.JButton();
         btnClose = new javax.swing.JButton();
+
+        delete.setText("Delete");
+        delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteActionPerformed(evt);
+            }
+        });
+        popUpMenu.add(delete);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -317,7 +326,7 @@ public class DialogBendahara extends javax.swing.JDialog {
         String username=txtUsername.getText();
         String password=txtPassword.getText();
         
-        char [] x= new char[1];
+        char [] x= new char[5];
         
         for(int c=0;c<id_ukm.length();c++){
             if(id_ukm.charAt(c)!='-'){
@@ -360,6 +369,17 @@ public class DialogBendahara extends javax.swing.JDialog {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_btnCloseActionPerformed
+
+    private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
+        // TODO add your handling code here:
+        int result = JOptionPane.showConfirmDialog(rootPane, "Apakah Yakin Untuk Didelete?","Delete Dialog",JOptionPane.YES_NO_OPTION);
+        if(result == JOptionPane.YES_OPTION){
+            int id = Integer.parseInt(tblBendahara.getModel().getValueAt(tblBendahara.getSelectedRow(), 0).toString());
+            cb.deleteBendahara(id);
+            clear();
+        }
+        
+    }//GEN-LAST:event_deleteActionPerformed
 
     private void setTableBendahara(List<Bendahara> listBendahara){
         if(listBendahara==null){
@@ -457,6 +477,7 @@ public class DialogBendahara extends javax.swing.JDialog {
     private javax.swing.JButton btnClose;
     private javax.swing.JButton btnSave;
     private javax.swing.JComboBox<String> cbxUkm;
+    private javax.swing.JMenuItem delete;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

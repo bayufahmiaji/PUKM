@@ -1,0 +1,38 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package pukm.controller;
+
+import java.util.List;
+import pukm.model.Anggota;
+import pukm.model.query.QueryAnggota;
+
+/**
+ *
+ * @author AdittyaS
+ */
+public class ControllerAnggota {
+    private QueryAnggota queryAnggota = new QueryAnggota();
+    
+    public List<Anggota> getAllAnggota(){
+        return queryAnggota.getallAnggota();
+    }
+    
+    public List<Anggota> getAllAnggotaByName(String nama_anggota){
+        return queryAnggota.getAllAnggotaByName(nama_anggota);
+    }
+    
+    public boolean insertAnggota(Anggota data){
+        return queryAnggota.insert(data);
+    }
+    
+    public boolean updateAnggota(Anggota data){
+        return queryAnggota.update(data);
+    }
+    
+    public boolean deleteAnggota(int id_anggota){
+        return queryAnggota.delete(id_anggota);
+    }
+}

@@ -46,6 +46,7 @@ public class DialogSekertaris extends javax.swing.JDialog {
     private void initComponents() {
 
         popUpMenu = new javax.swing.JPopupMenu();
+        mndelete = new javax.swing.JMenuItem();
         jLabel5 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -67,6 +68,14 @@ public class DialogSekertaris extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblSerketaris = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
+
+        mndelete.setText("Delete Item");
+        mndelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mndeleteActionPerformed(evt);
+            }
+        });
+        popUpMenu.add(mndelete);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -285,7 +294,7 @@ public class DialogSekertaris extends javax.swing.JDialog {
         String user=txtUser.getText();
         String password=txtPassword.getText();
         
-        char [] x= new char[1];
+        char [] x= new char[5];
         
         for(int c=0;c<id_ukm.length();c++){
             if(id_ukm.charAt(c)!='-'){
@@ -378,6 +387,18 @@ public class DialogSekertaris extends javax.swing.JDialog {
             popUpMenu.show(tblSerketaris,evt.getX(),evt.getY());
         }
     }//GEN-LAST:event_tblSerketarisMouseReleased
+
+    private void mndeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mndeleteActionPerformed
+        
+        int result = JOptionPane.showConfirmDialog(rootPane, "Apakah Yakin Untuk Didelete?","Delete Dialog",JOptionPane.YES_NO_OPTION);
+                if(result == JOptionPane.YES_OPTION){
+                    int id = Integer.parseInt(tblSerketaris.getModel().getValueAt(tblSerketaris.getSelectedRow(), 0).toString());
+                    cs.deleteSeketaris(id);
+                    clear();
+                }
+                    
+    
+    }//GEN-LAST:event_mndeleteActionPerformed
 
     
     private void setDataSeketaris(List<Seketaris> listSektaris){
@@ -489,6 +510,7 @@ public class DialogSekertaris extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbReport;
+    private javax.swing.JMenuItem mndelete;
     private javax.swing.JPopupMenu popUpMenu;
     private javax.swing.JTable tblSerketaris;
     private javax.swing.JTextField txtIdSekertaris;

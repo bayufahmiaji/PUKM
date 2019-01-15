@@ -338,7 +338,7 @@ public class FormMainUKM extends javax.swing.JFrame {
 
    private void setTableUKM(List<Ukm> listUKm){
         if(listUKm==null){
-            JOptionPane.showMessageDialog(this,"Data Karyawan Gagal Diambil Dari Database",
+            JOptionPane.showMessageDialog(this,"Data UKM Gagal Diambil Dari Database",
                     "DATABASE FAILED",JOptionPane.ERROR_MESSAGE);
         }else{
             //setting table admin
