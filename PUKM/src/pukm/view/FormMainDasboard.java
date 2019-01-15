@@ -5,17 +5,29 @@
  */
 package pukm.view;
 
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import pukm.controller.ControllerAnggota;
+import pukm.controller.ControllerUkm;
+import pukm.model.Anggota;
+import pukm.model.Ukm;
+
 /**
  *
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
 public class FormMainDasboard extends javax.swing.JFrame {
-
+    private final ControllerUkm controllerUkm = new ControllerUkm();
+    private final ControllerAnggota controllerAnggota = new ControllerAnggota();
+    
     /**
      * Creates new form FormMainDasboard
      */
     public FormMainDasboard() {
         initComponents();
+        setTableUKM(controllerUkm.getallData());
+        setTableAnggota(controllerAnggota.getAllAnggota());
     }
 
     /**
@@ -71,7 +83,7 @@ public class FormMainDasboard extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 643, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -106,9 +118,9 @@ public class FormMainDasboard extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                    .addContainerGap(17, Short.MAX_VALUE)
+                    .addContainerGap(21, Short.MAX_VALUE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 643, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(16, Short.MAX_VALUE)))
+                    .addContainerGap(20, Short.MAX_VALUE)))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -195,20 +207,19 @@ public class FormMainDasboard extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(34, 34, 34)
-                                .addComponent(jLabel1))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(21, 21, 21)
-                                .addComponent(jLabel2)))
-                        .addGap(0, 3, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGap(34, 34, 34)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(jLabel2)))
+                .addContainerGap(498, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -256,9 +267,65 @@ public class FormMainDasboard extends javax.swing.JFrame {
         new DialogLogin(login, rootPaneCheckingEnabled).setVisible(true);
     }//GEN-LAST:event_loginSekretarisActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+     private void setTableUKM(List<Ukm> listUKm){
+        if(listUKm==null){
+            JOptionPane.showMessageDialog(this,"Data UKM Gagal Diambil Dari Database",
+                    "DATABASE FAILED",JOptionPane.ERROR_MESSAGE);
+        }else{
+            //setting table admin
+            DefaultTableModel tableModel = new DefaultTableModel();
+            tableModel.setColumnIdentifiers(new String[]{
+                "Id UKM",
+                "Nama UKM",
+                "Saldo UKM"
+            });
+            
+            //mengambil data untuk table admin
+            for(Ukm a : listUKm){
+                Object[] o = new Object[3];
+                o[0] = a.getId_ukm();
+                o[1] = a.getNama_ukm();
+                o[2] = a.getSaldo_ukm();
+                tableModel.addRow(o);
+        }
+            tblSaldo.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+            tblSaldo.setModel(tableModel);
+    }
+    }
+     private void setTableAnggota(List<Anggota> listAnggota){
+        if(listAnggota==null){
+            JOptionPane.showMessageDialog(this,"Data Anggota Gagal Diambil Dari Database",
+                    "DATABASE FAILED",JOptionPane.ERROR_MESSAGE);
+        }else{
+            //setting table admin
+            DefaultTableModel tableModel = new DefaultTableModel();
+            tableModel.setColumnIdentifiers(new String[]{
+                "ID Anggota",
+                "ID UKM",
+                "Nama Anggota",
+                "Alamat",
+                "Saldo Anggota",
+                "Nama UKM",
+                "Jabatan"
+            });
+            
+            //mengambil data untuk table admin
+            for(Anggota a : listAnggota){
+                Object[] o = new Object[7];
+                o[0] = a.getId_anggota();
+                o[1] = a.getId_ukm();
+                o[2] = a.getNama_anggota();
+                o[3] = a.getAlamat();
+                o[4] = a.getSaldo_anggota();
+                o[5] = a.getNama_ukm();
+                o[6] = a.getJabatan();
+                tableModel.addRow(o);
+        }
+            tblAnggota.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+            tblAnggota.setModel(tableModel);
+    }
+    }
+     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
