@@ -32,7 +32,7 @@ public class QueryUkm implements InterfaceUkm{
             PreparedStatement statement = conn.prepareStatement(sql);
             
             statement.setInt(1, u.getId_ukm());
-                statement.setString(2, u.getNama_ukm());
+            statement.setString(2, u.getNama_ukm());
             statement.setInt(3, u.getSaldo_ukm());
             int row = statement.executeUpdate();
             if(row>0){
@@ -46,14 +46,14 @@ public class QueryUkm implements InterfaceUkm{
     }
 
     @Override
-    public boolean update(Ukm u) {
-      String sql = "UPDATE ukm SET nama_ukm=?, saldo_ukm=? WHERE id_ukm=?";
+    public boolean update(Ukm data) {
+      String sql = "UPDATE ukm set nama_ukm=? , saldo_ukm=? where id_ukm=?";
         try{
             PreparedStatement statement = conn.prepareStatement(sql);
             
-            statement.setString(1, u.getNama_ukm());
-            statement.setInt(2, u.getSaldo_ukm());
-            statement.setInt(3, u.getId_ukm());
+            statement.setString(1, data.getNama_ukm());
+            statement.setInt(2, data.getSaldo_ukm());
+            statement.setInt(3, data.getId_ukm());
             int row = statement.executeUpdate();
             if(row>0){
                 return true;
@@ -68,7 +68,7 @@ public class QueryUkm implements InterfaceUkm{
 
     @Override
     public boolean delete(int id_ukm) {
-        String sql = "DELETE FROM ukm where id_ukm=?";
+        String sql = "Delete from ukm where id_ukm=?";
         try{
             PreparedStatement statement = conn.prepareStatement(sql);
             
@@ -82,7 +82,8 @@ public class QueryUkm implements InterfaceUkm{
         } catch (SQLException ex) { 
             Logger.getLogger(QueryUkm.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return false; }
+        return false; 
+    }
 
     @Override
     public List<Ukm> getallUkm() {
@@ -121,9 +122,7 @@ public class QueryUkm implements InterfaceUkm{
                 ResultSet rs = statement.executeQuery();
                 while(rs.next()){
                     Ukm s = new Ukm(
-                                rs.getInt(1), 
-                                rs.getString(2), 
-                                rs.getInt(3));
+                                rs.getInt(1), rs.getString(2), rs.getInt(3));
                     listukm.add(s);
                 }
                 statement.close();

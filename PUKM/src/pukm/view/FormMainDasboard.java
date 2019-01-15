@@ -150,12 +150,27 @@ public class FormMainDasboard extends javax.swing.JFrame {
         jMenu3.setText("Login");
 
         mnAdmin.setText("Login Admin");
+        mnAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnAdminActionPerformed(evt);
+            }
+        });
         jMenu3.add(mnAdmin);
 
         loginBendahara.setText("Login Bendahara");
+        loginBendahara.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginBendaharaActionPerformed(evt);
+            }
+        });
         jMenu3.add(loginBendahara);
 
         loginSekretaris.setText("Login Seketaris");
+        loginSekretaris.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginSekretarisActionPerformed(evt);
+            }
+        });
         jMenu3.add(loginSekretaris);
 
         jMenuBar1.add(jMenu3);
@@ -225,6 +240,21 @@ public class FormMainDasboard extends javax.swing.JFrame {
        DialogInfoUkm dialog = new DialogInfoUkm(this, rootPaneCheckingEnabled);
        dialog.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void mnAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnAdminActionPerformed
+        String login = "Login Admin";
+        new DialogLogin(login, rootPaneCheckingEnabled).setVisible(true);
+    }//GEN-LAST:event_mnAdminActionPerformed
+
+    private void loginBendaharaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBendaharaActionPerformed
+        String login = "Login Bendahara";
+        new DialogLogin(login, rootPaneCheckingEnabled).setVisible(true);
+    }//GEN-LAST:event_loginBendaharaActionPerformed
+
+    private void loginSekretarisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginSekretarisActionPerformed
+        String login = "Login Sekertaris";
+        new DialogLogin(login, rootPaneCheckingEnabled).setVisible(true);
+    }//GEN-LAST:event_loginSekretarisActionPerformed
 
     /**
      * @param args the command line arguments

@@ -54,7 +54,7 @@ public class DialogAbout extends javax.swing.JDialog {
 
         jLabel6.setText("Andika Fajar Pratama");
 
-        jLabel7.setText("Bayu Fahmi Aji");
+        jLabel7.setText("Bayu Fahmiaji Fadillah");
 
         jLabel8.setText("Riyan Adriansyah");
 

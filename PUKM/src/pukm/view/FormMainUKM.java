@@ -367,6 +367,7 @@ public class FormMainUKM extends javax.swing.JFrame {
        txtIdUkm.setText("");
        txtNamaUkm.setText("");
        txtSaldoUkm.setText("");
+       btnsave.setText("Save");
        setTableUKM(controllerUkm.getallData());
    }
     public static void main(String args[]) {

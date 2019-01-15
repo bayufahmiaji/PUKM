@@ -43,16 +43,25 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Login Admin"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnAdminActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="loginBendahara">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Login Bendahara"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="loginBendaharaActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="loginSekretaris">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Login Seketaris"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="loginSekretarisActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
