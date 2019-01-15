@@ -94,7 +94,7 @@ public class QuerySeketaris implements InterfacesSeketaris{
 
     @Override
     public List<Seketaris> getAllData() {
-        List<Seketaris> listSerketaris=new ArrayList<>();
+        List<Seketaris> listSerketaris=new ArrayList<Seketaris>();
        String sql="select * from sekertaris";
        try{
            PreparedStatement statement=conn.prepareStatement(sql);

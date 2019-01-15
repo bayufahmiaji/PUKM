@@ -335,12 +335,15 @@ public class DialogBendahara extends javax.swing.JDialog {
         if(btnSave.getText().equals("Save")){
             if(cb.insertBendahara(bendahara)){
                 lbResult.setText("Saved");
+                setTableBendahara(cb.getAllBendahara());
             }else{
                 lbResult.setText("Failed Saved");
             }
         }else{
             if(cb.updateBendahara(bendahara)){
                 lbResult.setText("Updated");
+                setTableBendahara(cb.getAllBendahara());
+                btnSave.setText("Save");
             }else{
                 lbResult.setText("Failed Updated");
             }

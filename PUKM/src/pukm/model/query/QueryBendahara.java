@@ -94,7 +94,7 @@ public class QueryBendahara implements InterfacesBendahara {
 
     @Override
     public List<Bendahara> getAllData() {
-        List<Bendahara> listBendahara=new ArrayList<>();
+        List<Bendahara> listBendahara=new ArrayList<Bendahara>();
        String sql="select * from bendahara";
        try{
            PreparedStatement statement=conn.prepareStatement(sql);
