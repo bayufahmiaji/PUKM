@@ -161,6 +161,11 @@ public class FormDashboardSekertaris extends javax.swing.JFrame {
         jMenu2.setText("Master Sekertaris");
 
         mnAnggota.setText("Add Anggota");
+        mnAnggota.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnAnggotaActionPerformed(evt);
+            }
+        });
         jMenu2.add(mnAnggota);
 
         jMenuBar1.add(jMenu2);
@@ -207,6 +212,13 @@ public class FormDashboardSekertaris extends javax.swing.JFrame {
             this.dispose();
         }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void mnAnggotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnAnggotaActionPerformed
+        String id = lbIdUkm.getText();
+        String nama = lbNamaUKM.getText();
+        
+        new FormViewAnggota(id,nama).setVisible(true);
+    }//GEN-LAST:event_mnAnggotaActionPerformed
 
    private void setTableAnggota(List<Anggota> listAnggota){
         if(listAnggota==null){

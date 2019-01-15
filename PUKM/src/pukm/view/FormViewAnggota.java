@@ -25,6 +25,14 @@ public class FormViewAnggota extends javax.swing.JFrame {
         setTableAnggota(controllerAnggota.getAllAnggota());
     }
 
+    public FormViewAnggota(String id, String nama) {
+         initComponents();
+         lblIdUkm.setText(id);
+         lblNamaUkm.setText(nama);
+        setTableAnggota(controllerAnggota.getAllAnggota());
+    
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -71,7 +79,7 @@ public class FormViewAnggota extends javax.swing.JFrame {
         });
         popup.add(mnDelete);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 

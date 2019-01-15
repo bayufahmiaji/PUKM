@@ -46,7 +46,7 @@ public class QueryAnggota implements InterfaceAnggota {
 
     @Override
     public boolean update(Anggota data) {
-        String sql = "Update anggota set nama_anggota=?, alamat=?, saldo_anggota=?, jabatan=?, where id_anggota=?";
+        String sql = "Update anggota set nama_anggota=? , alamat=? , saldo_anggota=? , jabatan=? where id_anggota=?";
         try {
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setString(1, data.getNama_anggota());
