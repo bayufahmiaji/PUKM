@@ -162,6 +162,7 @@ public class DialogLogin extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
+        new FormMainDasboard().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnCloseActionPerformed
 

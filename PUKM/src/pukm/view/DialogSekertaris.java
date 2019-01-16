@@ -331,6 +331,7 @@ public class DialogSekertaris extends javax.swing.JDialog {
                 setDataSeketaris(cs.getAllSeketaris());
             }
         }
+        
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed

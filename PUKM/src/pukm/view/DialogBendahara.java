@@ -357,7 +357,7 @@ public class DialogBendahara extends javax.swing.JDialog {
                 lbResult.setText("Failed Updated");
             }
         }
-
+        clear();
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
@@ -378,7 +378,7 @@ public class DialogBendahara extends javax.swing.JDialog {
             cb.deleteBendahara(id);
             clear();
         }
-        
+  
     }//GEN-LAST:event_deleteActionPerformed
 
     private void setTableBendahara(List<Bendahara> listBendahara){

@@ -5,18 +5,24 @@
  */
 package pukm.view;
 
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import pukm.controller.ControllerUkm;
+import pukm.model.Ukm;
 /**
  *
  * @author User
  */
 public class FormDashboardAdmin extends javax.swing.JFrame {
-
+    private final ControllerUkm controllerUkm = new ControllerUkm();
     /**
      * Creates new form FormDashboardAdmin
      */
     public FormDashboardAdmin(String user) {
         initComponents();
         lbUser.setText(user);
+        setTableUKM(controllerUkm.getallData());
     }
 
     /**
@@ -30,7 +36,7 @@ public class FormDashboardAdmin extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblukm = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         lbUser = new javax.swing.JLabel();
@@ -48,7 +54,7 @@ public class FormDashboardAdmin extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblukm.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -59,7 +65,7 @@ public class FormDashboardAdmin extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblukm);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -111,6 +117,11 @@ public class FormDashboardAdmin extends javax.swing.JFrame {
         jMenu1.setText("File");
 
         jMenuItem1.setText("Log Out");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem1);
 
         jMenuBar1.add(jMenu1);
@@ -188,9 +199,40 @@ public class FormDashboardAdmin extends javax.swing.JFrame {
         new DialogSekertaris(this, rootPaneCheckingEnabled).setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        int result = JOptionPane.showConfirmDialog(rootPane, "Apakah Anda Yakin Akan Log Out?","Confrim Dialog",JOptionPane.YES_NO_OPTION);
+        if(result == JOptionPane.YES_OPTION){
+            new FormMainDasboard().setVisible(true);
+            this.dispose();
+        }
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void setTableUKM(List<Ukm> listUKm){
+        if(listUKm==null){
+            JOptionPane.showMessageDialog(this,"Data UKM Gagal Diambil Dari Database",
+                    "DATABASE FAILED",JOptionPane.ERROR_MESSAGE);
+        }else{
+            //setting table admin
+            DefaultTableModel tableModel = new DefaultTableModel();
+            tableModel.setColumnIdentifiers(new String[]{
+                "Id UKM",
+                "Nama UKM",
+                "Saldo UKM"
+            });
+            
+            //mengambil data untuk table admin
+            for(Ukm a : listUKm){
+                Object[] o = new Object[3];
+                o[0] = a.getId_ukm();
+                o[1] = a.getNama_ukm();
+                o[2] = a.getSaldo_ukm();
+                tableModel.addRow(o);
+        }
+            tblukm.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+            tblukm.setModel(tableModel);
+    }
+    }
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -236,7 +278,7 @@ public class FormDashboardAdmin extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lbUser;
+    private javax.swing.JTable tblukm;
     // End of variables declaration//GEN-END:variables
 }

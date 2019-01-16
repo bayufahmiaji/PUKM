@@ -39,4 +39,6 @@ public class ControllerUkm {
     public Ukm getDataUkmbyyID(int id_ukm){
         return queryUkm.getDataUkmbyId(id_ukm);
     }
+    
+   
 }

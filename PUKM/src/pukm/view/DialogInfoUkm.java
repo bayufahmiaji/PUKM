@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
  * @author AdittyaS
  */
 public class DialogInfoUkm extends javax.swing.JDialog {
-
+    
     /**
      * Creates new form DialogInfoUkmnn
      */
@@ -36,7 +36,7 @@ public class DialogInfoUkm extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         lblJumlah = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        lblUKM = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -60,8 +60,8 @@ public class DialogInfoUkm extends javax.swing.JDialog {
         lblJumlah.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblJumlah.setText("Sekian");
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel4.setText("UKM");
+        lblUKM.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        lblUKM.setText("UKM");
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pukm/images/anggota.png"))); // NOI18N
         jLabel3.setText(" ");
@@ -98,7 +98,7 @@ public class DialogInfoUkm extends javax.swing.JDialog {
                             .addComponent(lblJumlah))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
+                            .addComponent(lblUKM)
                             .addComponent(jLabel6)))
                     .addComponent(jLabel7))
                 .addContainerGap(69, Short.MAX_VALUE))
@@ -114,7 +114,7 @@ public class DialogInfoUkm extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(lblJumlah)
-                    .addComponent(jLabel4))
+                    .addComponent(lblUKM))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -181,11 +181,11 @@ public class DialogInfoUkm extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblJumlah;
+    private javax.swing.JLabel lblUKM;
     // End of variables declaration//GEN-END:variables
 }

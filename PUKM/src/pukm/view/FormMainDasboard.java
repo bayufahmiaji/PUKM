@@ -255,16 +255,19 @@ public class FormMainDasboard extends javax.swing.JFrame {
     private void mnAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnAdminActionPerformed
         String login = "Login Admin";
         new DialogLogin(login, rootPaneCheckingEnabled).setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_mnAdminActionPerformed
 
     private void loginBendaharaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBendaharaActionPerformed
         String login = "Login Bendahara";
         new DialogLogin(login, rootPaneCheckingEnabled).setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_loginBendaharaActionPerformed
 
     private void loginSekretarisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginSekretarisActionPerformed
         String login = "Login Sekertaris";
         new DialogLogin(login, rootPaneCheckingEnabled).setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_loginSekretarisActionPerformed
 
      private void setTableUKM(List<Ukm> listUKm){
