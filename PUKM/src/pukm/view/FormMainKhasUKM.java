@@ -5,17 +5,30 @@
  */
 package pukm.view;
 
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import pukm.controller.ControllerKasUKM;
+import pukm.model.KasUKM;
+
 /**
  *
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
 public class FormMainKhasUKM extends javax.swing.JFrame {
 
+    private final ControllerKasUKM controllerKasUKM = new ControllerKasUKM();
     /**
      * Creates new form FormMainKhasUKM
      */
     public FormMainKhasUKM() {
         initComponents();
+        setTableKasUKM(controllerKasUKM.getAllData());
+    }
+    public FormMainKhasUKM(String nama_ukm) {
+         initComponents();
+         lblNama_ukm.setText(nama_ukm);
+    
     }
 
     /**
@@ -36,6 +49,8 @@ public class FormMainKhasUKM extends javax.swing.JFrame {
         txtSaldoUKM = new javax.swing.JTextField();
         txtUangMasuk = new javax.swing.JTextField();
         txtUangKeluar = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        lblNama_ukm = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -63,6 +78,10 @@ public class FormMainKhasUKM extends javax.swing.JFrame {
             }
         });
 
+        jLabel7.setText("Nama UKM");
+
+        lblNama_ukm.setText("nama_ukm");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -81,11 +100,14 @@ public class FormMainKhasUKM extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addGap(25, 25, 25)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(idUkm, javax.swing.GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)
-                            .addComponent(txtSaldoUKM)))))
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel7))
+                        .addGap(24, 24, 24)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblNama_ukm)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(idUkm, javax.swing.GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)
+                                .addComponent(txtSaldoUKM))))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -95,6 +117,10 @@ public class FormMainKhasUKM extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(idUkm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(lblNama_ukm))
+                .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtSaldoUKM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -106,7 +132,7 @@ public class FormMainKhasUKM extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtUangKeluar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         jLabel5.setText("Out Put");
@@ -144,10 +170,25 @@ public class FormMainKhasUKM extends javax.swing.JFrame {
         jLabel6.setText("Actiion");
 
         btnClear.setText("Clear");
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearActionPerformed(evt);
+            }
+        });
 
         btnClose.setText("Close");
+        btnClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCloseActionPerformed(evt);
+            }
+        });
 
         btnSave.setText("Save");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -183,43 +224,46 @@ public class FormMainKhasUKM extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addComponent(jLabel5))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(510, 510, 510)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(48, 48, 48)
                                         .addComponent(jLabel6))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(252, 252, 252)
-                        .addComponent(lblHasil)))
+                        .addGap(262, 262, 262)
+                        .addComponent(lblHasil))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addComponent(jLabel5)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblHasil)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -229,6 +273,93 @@ public class FormMainKhasUKM extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_idUkmActionPerformed
 
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        // TODO add your handling code here:
+        int idreg_ukm = Integer.parseInt(idUkm.getText());
+        int id_ukm = Integer.parseInt(idUkm.getText());
+        String nama_ukm = lblNama_ukm.getText();
+        int saldo_ukm = Integer.parseInt(txtSaldoUKM.getText());
+        int uang_masuk = Integer.parseInt(txtUangMasuk.getText());
+        int uang_keluar = Integer.parseInt(txtUangKeluar.getText());
+        
+        KasUKM data = new KasUKM(idreg_ukm , id_ukm, nama_ukm, saldo_ukm, uang_masuk, uang_keluar);
+        
+        //input data ke database
+        if(btnSave.getText().equals("Save")){
+            if(controllerKasUKM.insertKasUKM(data)){
+                lblHasil.setText("Insert Berhasil");
+            }else{
+                lblHasil.setText("Insert Gagal");
+            }
+        }else{
+            //update data di database
+            if(controllerKasUKM.updateKasUKM(data)){
+                lblHasil.setText("Update Berhasil");
+            }else{
+                lblHasil.setText("Upate Gagal");
+            }
+        }
+        setClear();
+    }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+        setClear();
+    }//GEN-LAST:event_btnClearActionPerformed
+
+    private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnCloseActionPerformed
+
+    private void mnDeleteActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        //delete record di database 
+        
+        int result = JOptionPane.showConfirmDialog(rootPane, "Apakah Yakin Untuk Didelete?","Delete Dialog",JOptionPane.YES_NO_OPTION);
+        if(result == JOptionPane.YES_OPTION){
+            int id = Integer.parseInt(tblUang.getModel().getValueAt(tblUang.getSelectedRow(), 0).toString());
+            controllerKasUKM.deleteKasUKM(id);
+            setClear();
+        }
+    }
+    
+    private void setTableKasUKM(List<KasUKM> listKasUKM){
+        if(listKasUKM==null){
+            JOptionPane.showMessageDialog(this,"Data Kas KM Gagal Diambil Dari Database",
+                    "DATABASE FAILED",JOptionPane.ERROR_MESSAGE);
+        }else{
+            //setting table admin
+            DefaultTableModel tableModel = new DefaultTableModel();
+            tableModel.setColumnIdentifiers(new String[]{
+                "Id UKM",
+                "Nama UKM",
+                "Saldo UKM",
+                "Uang Masuk",
+                "Uang Keluar"
+            });
+            
+            //mengambil data untuk table admin
+            for(KasUKM ku : listKasUKM){
+                Object[] o = new Object[5];
+                o[0] = ku.getId_ukm();
+                o[1] = ku.getNama_ukm();
+                o[2] = ku.getSaldo_ukm();
+                o[3] = ku.getUang_masuk();
+                o[4] = ku.getUang_keluar();
+                tableModel.addRow(o);
+        }
+            tblUang.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+            tblUang.setModel(tableModel);
+    }
+    }
+    
+       public void setClear(){
+       //menghapus record pada frame
+       idUkm.setText("");
+       txtSaldoUKM.setText("");
+       txtUangMasuk.setText("");
+       txtUangKeluar.setText("");
+       btnSave.setText("Save");
+       setTableKasUKM(controllerKasUKM.getAllData());
+   }
     /**
      * @param args the command line arguments
      */
@@ -275,14 +406,17 @@ public class FormMainKhasUKM extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblHasil;
+    private javax.swing.JLabel lblNama_ukm;
     private javax.swing.JTable tblUang;
     private javax.swing.JTextField txtSaldoUKM;
     private javax.swing.JTextField txtUangKeluar;
     private javax.swing.JTextField txtUangMasuk;
     // End of variables declaration//GEN-END:variables
+
 }
