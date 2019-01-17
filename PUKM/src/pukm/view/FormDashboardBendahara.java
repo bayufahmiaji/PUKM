@@ -6,13 +6,14 @@
 package pukm.view;
 
 import javax.swing.JOptionPane;
+import pukm.controller.ControllerTransaksiUkm;
 
 /**
  *
  * @author User
  */
 public class FormDashboardBendahara extends javax.swing.JFrame {
-
+    private ControllerTransaksiUkm controllerTransaksi = new ControllerTransaksiUkm();
     /**
      * Creates new form FormDashboardSekertaris
      */
@@ -209,6 +210,11 @@ public class FormDashboardBendahara extends javax.swing.JFrame {
         jMenu3.setText("Transaksi");
 
         jMenuItem2.setText("Transaksi");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem2);
 
         jMenuBar1.add(jMenu3);
@@ -263,6 +269,12 @@ public class FormDashboardBendahara extends javax.swing.JFrame {
             this.dispose();
         }
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        String id = lbIdUkm.getText();
+        String nama = lbNamaUkm.getText();
+        new FormViewTransaksiUKM(id, nama, nama).setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
