@@ -5,17 +5,29 @@
  */
 package pukm.view;
 
+import java.util.Calendar;
+import javax.swing.JOptionPane;
+import pukm.controller.ControllerTransaksiUkm;
+import pukm.model.TransaksiUkm;
+
 /**
  *
  * @author AdittyaS
  */
 public class FormViewTransaksiUKM extends javax.swing.JFrame {
-
+    private ControllerTransaksiUkm controllerTransaksi = new ControllerTransaksiUkm();
     /**
      * Creates new form FormViewTransaksiUKM
      */
     public FormViewTransaksiUKM() {
         initComponents();
+        initData();
+    }
+    
+    public FormViewTransaksiUKM(String id, String nama, String saldo){
+        initComponents();
+         lblIdUkm.setText(id);
+         lblNamaUkm.setText(nama);
     }
 
     /**
@@ -52,7 +64,7 @@ public class FormViewTransaksiUKM extends javax.swing.JFrame {
         jLabel29 = new javax.swing.JLabel();
         txtJumlahPengeluaran = new javax.swing.JTextField();
         jLabel30 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        lblSisa = new javax.swing.JLabel();
         btnSimpan = new javax.swing.JButton();
         btnClear = new javax.swing.JButton();
         btnClose = new javax.swing.JButton();
@@ -122,17 +134,40 @@ public class FormViewTransaksiUKM extends javax.swing.JFrame {
         jLabel30.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel30.setText("Jumlah Sisa Saldo :");
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel6.setText("saldo");
+        lblSisa.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblSisa.setText("saldo");
 
         btnSimpan.setText("Simpan");
+        btnSimpan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSimpanActionPerformed(evt);
+            }
+        });
 
         btnClear.setText("Clear");
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearActionPerformed(evt);
+            }
+        });
 
         btnClose.setText("Close");
+        btnClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCloseActionPerformed(evt);
+            }
+        });
 
         txtHasil.setColumns(20);
         txtHasil.setRows(5);
+        txtHasil.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtHasilMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                txtHasilMouseReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(txtHasil);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -189,7 +224,7 @@ public class FormViewTransaksiUKM extends javax.swing.JFrame {
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel30)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jLabel6))
+                                        .addComponent(lblSisa))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
@@ -247,7 +282,7 @@ public class FormViewTransaksiUKM extends javax.swing.JFrame {
                 .addGap(41, 41, 41)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel30)
-                    .addComponent(jLabel6))
+                    .addComponent(lblSisa))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSimpan)
@@ -282,9 +317,75 @@ public class FormViewTransaksiUKM extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
+        String tanggal = lblTanggal.getText();
+        int id_transaksi = Integer.parseInt(lblIdTransaksi.getText());
+        int id_ukm = Integer.parseInt(lblIdUkm.getText());
+        String nama_ukm = lblNamaUkm.getText();
+        int saldo_ukm = Integer.parseInt(lblSaldoUkm.getText());
+        String detail = txtDetailPengeluaran.getText();
+        int pengeluaran = Integer.parseInt(txtJumlahPengeluaran.getText());
+        int sisa_saldo = Integer.parseInt(lblSisa.getText());
+        int hasil = saldo_ukm - pengeluaran;
+        TransaksiUkm transaksi = new TransaksiUkm(id_transaksi, id_ukm, nama_ukm, tanggal, detail, hasil);
+        if(btnSimpan.getText().equals("Simpan")){
+            if(controllerTransaksi.insertTransaksi(transaksi)){
+                txtHasil.setText("ID Transaksi : "+transaksi.getId_transaksi()+"\nID UKM : "+transaksi.getId_ukm()+
+                        "\nNama UKM : " + transaksi.getNama_ukm()+"\nTanggal : "+transaksi.getTanggal()+
+                        "\nDetail Pengeluaran : "+ transaksi.getDetail()+"\n Jumlah Pengeluaran : "+pengeluaran+
+                        "\nSisa Saldo Saat Ini : "+transaksi.getSaldo_ukm());
+                lblSisa.setText(Integer.toString(hasil));
+            }
+        } else {
+            if(controllerTransaksi.updateTransaksi(transaksi)){
+                JOptionPane.showMessageDialog(this, "Update Berhasil");
+            }
+        }
+        setClear();
+    }//GEN-LAST:event_btnSimpanActionPerformed
+
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+        setClear();
+    }//GEN-LAST:event_btnClearActionPerformed
+
+    private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnCloseActionPerformed
+
+    private void txtHasilMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtHasilMousePressed
+        if(evt.getClickCount()==1){
+            btnSimpan.setText("Update"); 
+        }
+    }//GEN-LAST:event_txtHasilMousePressed
+
+    private void txtHasilMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtHasilMouseReleased
+        if(evt.getClickCount()==1){
+            btnSimpan.setText("Update");
+        }
+    }//GEN-LAST:event_txtHasilMouseReleased
+
     /**
      * @param args the command line arguments
      */
+    
+    public void setClear(){
+        Calendar c = Calendar.getInstance();
+        String date = c.get(Calendar.YEAR) +"/"+ c.get(Calendar.MONTH) +"/"+ c.get(Calendar.DATE);
+        lblTanggal.setText(date);
+        lblIdTransaksi.setText(controllerTransaksi.generateID()+"");
+        txtDetailPengeluaran.setText("");
+        txtJumlahPengeluaran.setText("");
+        lblSisa.setText("saldo");
+        txtHasil.setText("");
+    }
+    
+    public void initData(){
+        Calendar c = Calendar.getInstance();
+        String date = c.get(Calendar.YEAR) +"/"+ c.get(Calendar.MONTH) +"/"+ c.get(Calendar.DATE);
+        lblTanggal.setText(date);
+        lblIdTransaksi.setText(controllerTransaksi.generateID()+"");
+    }
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -337,7 +438,6 @@ public class FormViewTransaksiUKM extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -345,6 +445,7 @@ public class FormViewTransaksiUKM extends javax.swing.JFrame {
     private javax.swing.JLabel lblIdUkm;
     private javax.swing.JLabel lblNamaUkm;
     private javax.swing.JLabel lblSaldoUkm;
+    private javax.swing.JLabel lblSisa;
     private javax.swing.JLabel lblTanggal;
     private javax.swing.JTextField txtDetailPengeluaran;
     private javax.swing.JTextArea txtHasil;

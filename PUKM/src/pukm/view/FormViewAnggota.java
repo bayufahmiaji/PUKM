@@ -29,7 +29,7 @@ public class FormViewAnggota extends javax.swing.JFrame {
          initComponents();
          lblIdUkm.setText(id);
          lblNamaUkm.setText(nama);
-        setTableAnggota(controllerAnggota.getAllAnggota());
+         setTableAnggota(controllerAnggota.getAllAnggota());
     
     }
 
