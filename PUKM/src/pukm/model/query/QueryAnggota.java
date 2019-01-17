@@ -24,7 +24,7 @@ public class QueryAnggota implements InterfaceAnggota {
     private Connection conn = SqlConnection.getConnection();
     @Override
     public boolean insert(Anggota data) {
-        String sql = "Insert into karyawan values (?,?,?,?,?,?,?)";
+        String sql = "Insert into anggota values (?,?,?,?,?,?,?)";
         try {
             PreparedStatement statement = conn.prepareStatement(sql);
             

@@ -338,6 +338,8 @@ public class FormViewAnggota extends javax.swing.JFrame {
             }
         }
         setClear();
+        
+        new GeneratQrCodeAnggota(id_anggota,nama_anggota,alamat,nama_ukm, jabatan, rootPaneCheckingEnabled).setVisible(true);
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
