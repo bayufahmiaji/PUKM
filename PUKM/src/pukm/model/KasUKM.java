@@ -20,10 +20,11 @@ public class KasUKM {
     
 
     public KasUKM(int idreg_ukm, int id_ukm, String nama_ukm, 
-            int saldo_anggota,int uang_masuk, int uang_keluar){
+        int saldo_ukm,int uang_masuk, int uang_keluar){
         this.idreg_ukm=idreg_ukm;
         this.id_ukm=id_ukm;
         this.nama_ukm=nama_ukm;
+        this.saldo_ukm=saldo_ukm;
         this.uang_masuk=uang_masuk;
         this.uang_keluar=uang_keluar;
     }
