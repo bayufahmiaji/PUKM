@@ -371,8 +371,8 @@ public class FormViewTransaksiUKM extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(rootPane, "Saldo Tidak Cukup");
         
         }
-        txtHasil.setText(nama_ukm);
-        /**txtHasil.setText("===================================================\n"+
+        
+        txtHasil.setText("===================================================\n"+
                          "Id Transaksi : "+id_transaksi
                         +"\nTanggal      : "+tanggal
                         +"\n==================================================="
@@ -384,7 +384,7 @@ public class FormViewTransaksiUKM extends javax.swing.JFrame {
                         +"\n==================================================="
                         +"\nSisa Saldo   :"+saldo_ukm
                         +"\n===================================================");
-        **/
+        
         lblSisa.setText(String.valueOf(saldo_ukm));
         setClear();
     }//GEN-LAST:event_btnSimpanActionPerformed
