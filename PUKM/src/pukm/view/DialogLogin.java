@@ -197,7 +197,7 @@ public class DialogLogin extends javax.swing.JDialog {
                 Bendahara bendahara=controllerBendahara.getDataByUserBendahara(username);
                 Ukm ukm=controllerUkm.getDataUkmbyyID(bendahara.getId_ukm());
                 new FormDashboardBendahara(bendahara.getNama_bendahara(),
-                        Integer.toString(ukm.id_ukm),ukm.getNama_ukm()).setVisible(true);
+                        Integer.toString(ukm.id_ukm),ukm.getNama_ukm(),ukm.saldo_ukm).setVisible(true);
                 dispose();
                 //JOptionPane.showMessageDialog(this, "Benar..");
             }else{

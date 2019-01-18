@@ -24,10 +24,12 @@ public class FormViewTransaksiUKM extends javax.swing.JFrame {
         initData();
     }
     
-    public FormViewTransaksiUKM(String id, String nama, String saldo){
+    public FormViewTransaksiUKM(String id, String nama, int saldo){
         initComponents();
          lblIdUkm.setText(id);
          lblNamaUkm.setText(nama);
+         lblSaldoUkm.setText(Integer.toString(saldo));
+         initData();
     }
 
     /**
@@ -327,7 +329,7 @@ public class FormViewTransaksiUKM extends javax.swing.JFrame {
         int pengeluaran = Integer.parseInt(txtJumlahPengeluaran.getText());
         int sisa_saldo = Integer.parseInt(lblSisa.getText());
         int hasil = saldo_ukm - pengeluaran;
-        TransaksiUkm transaksi = new TransaksiUkm(id_transaksi, id_ukm, nama_ukm, tanggal, detail, hasil);
+        TransaksiUkm transaksi = new TransaksiUkm(id_transaksi, id_ukm, nama_ukm, tanggal, detail, hasil,pengeluaran);
         if(btnSimpan.getText().equals("Simpan")){
             if(controllerTransaksi.insertTransaksi(transaksi)){
                 txtHasil.setText("ID Transaksi : "+transaksi.getId_transaksi()+"\nID UKM : "+transaksi.getId_ukm()+
