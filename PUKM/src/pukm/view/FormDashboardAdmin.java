@@ -46,6 +46,7 @@ public class FormDashboardAdmin extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
 
@@ -136,6 +137,14 @@ public class FormDashboardAdmin extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem4);
 
+        jMenuItem5.setText("Add UKM");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem5);
+
         jMenuItem2.setText("Add Bendahara");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -207,6 +216,12 @@ public class FormDashboardAdmin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        // TODO add your handling code here:
+        
+        new FormMainUKM().setVisible(true);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
     private void setTableUKM(List<Ukm> listUKm){
         if(listUKm==null){
             JOptionPane.showMessageDialog(this,"Data UKM Gagal Diambil Dari Database",
@@ -275,6 +290,7 @@ public class FormDashboardAdmin extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;

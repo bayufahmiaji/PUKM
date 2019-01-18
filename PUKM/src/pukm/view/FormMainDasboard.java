@@ -240,6 +240,10 @@ public class FormMainDasboard extends javax.swing.JFrame {
 
     private void mnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnExitActionPerformed
         // TODO add your handling code here:
+        int result = JOptionPane.showConfirmDialog(rootPane, "Apakah Anda Yakin Akan Log Out?","Confrim Dialog",JOptionPane.YES_NO_OPTION);
+        if(result == JOptionPane.YES_OPTION){
+            System.exit(0);
+        }
     }//GEN-LAST:event_mnExitActionPerformed
 
     private void mnAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnAboutActionPerformed
