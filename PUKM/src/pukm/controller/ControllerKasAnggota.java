@@ -33,4 +33,8 @@ public class ControllerKasAnggota {
     
     public List<KasAnggota> getAllDataByID(int idreg_anggota){
     return qka.getAllDataByID(idreg_anggota);}
+    
+    public int getREG(){
+    return qka.genIDReg();
+    }
 }

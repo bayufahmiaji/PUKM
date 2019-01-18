@@ -27,7 +27,7 @@ public class QueryKasAnggota implements InterfacesKasAnggota{
     
     @Override
     public boolean insert(KasAnggota data) {
-        String sql="insert into bendahara values(?,?,?,?,?,?)";
+        String sql="insert into kas_anggota values(?,?,?,?,?,?)";
         try{
             PreparedStatement statement= conn.prepareStatement(sql);
             statement.setInt(1, data.getIdreg_anggota());
@@ -95,7 +95,7 @@ public class QueryKasAnggota implements InterfacesKasAnggota{
     @Override
     public List<KasAnggota> getAllData() {
         List<KasAnggota> listKasAnggota=new ArrayList<KasAnggota>();
-       String sql="select * from bendahara";
+       String sql="select * from kas_anggota";
        try{
            PreparedStatement statement=conn.prepareStatement(sql);
            
@@ -106,9 +106,9 @@ public class QueryKasAnggota implements InterfacesKasAnggota{
                        rs.getInt(1), 
                        rs.getInt(2),
                        rs.getString(3),
-                       rs.getInt(4),
+                       rs.getInt(6),
                        rs.getInt(5),
-                       rs.getInt(6));
+                       rs.getInt(4));
                listKasAnggota.add(ks);
            }
            statement.close();
@@ -168,6 +168,25 @@ public class QueryKasAnggota implements InterfacesKasAnggota{
            Logger.getLogger(KasAnggota.class.getName()).log(Level.SEVERE,null,e);
        }
        return listKasAnggota;
+    }
+    
+    public int genIDReg(){
+        int reg=0;
+        String sql="exec genIDReg";
+        
+        try{
+            PreparedStatement statement= conn.prepareStatement(sql);
+            ResultSet rs=statement.executeQuery();
+            
+            while(rs.next()){
+                return reg=rs.getInt(1);
+            }
+            statement.close();
+        }catch(SQLException e){
+            Logger.getLogger(KasAnggota.class.getName()).log(Level.SEVERE,null,e);
+        }
+        
+        return reg;
     }
     
 }

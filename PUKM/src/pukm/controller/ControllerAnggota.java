@@ -35,4 +35,16 @@ public class ControllerAnggota {
     public boolean deleteAnggota(int id_anggota){
         return queryAnggota.delete(id_anggota);
     }
+    
+    public Anggota getOneAnggotaByID(int id_anggota){
+        return queryAnggota.getOneAnggotaByID(id_anggota);
+    }
+    
+    public List<Anggota> getIdAnggotaLike(int id_angoota){
+        return queryAnggota.getIdAnggotaLike(id_angoota);
+    }
+    
+    public boolean updateSaldoAAnggota(int id_anggota,int saldo){
+        return queryAnggota.updateSaldoAnggota(id_anggota, saldo);
+    }
 }

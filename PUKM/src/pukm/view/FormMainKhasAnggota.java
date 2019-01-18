@@ -5,17 +5,39 @@
  */
 package pukm.view;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import pukm.controller.ControllerAnggota;
+import pukm.controller.ControllerKasAnggota;
+import pukm.model.Anggota;
+import pukm.model.KasAnggota;
+import pukm.model.query.QueryAnggota;
+
 /**
  *
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
 public class FormMainKhasAnggota extends javax.swing.JFrame {
 
+    QueryAnggota qa= new QueryAnggota();
+    ControllerAnggota ca= new ControllerAnggota();
+    ControllerKasAnggota cka= new ControllerKasAnggota();
     /**
      * Creates new form FormMainKhasAnggota
      */
-    public FormMainKhasAnggota() {
+    public FormMainKhasAnggota(String nama_ukm) {
         initComponents();
+        txtUangKeluar.setText("0");
+        txtUangMasuk.setText("0");
+        lbNamaUkm.setText(nama_ukm);
+        listTranasaksi(cka.getAllData());
+        txtIDReg.setText(Integer.toString(cka.getREG()));
     }
 
     /**
@@ -34,9 +56,13 @@ public class FormMainKhasAnggota extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         txtUangMasuk = new javax.swing.JTextField();
         txtUangKeluar = new javax.swing.JTextField();
-        lblIdAnggota = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        lbSaldoAnggota = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        lbNamaUkm = new javax.swing.JLabel();
+        txtIdAnggota = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        txtIDReg = new javax.swing.JTextField();
+        lbReport = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblKasAnggota = new javax.swing.JTable();
@@ -59,63 +85,81 @@ public class FormMainKhasAnggota extends javax.swing.JFrame {
 
         jLabel4.setText("Uang Keluar");
 
-        lblIdAnggota.setText("id_anggota");
+        lbSaldoAnggota.setText("Saldo_Angggota");
 
-        jLabel6.setText("Saldo_Angggota");
+        jLabel9.setText("Nama Ukm");
+
+        lbNamaUkm.setText("Nama UKM");
+
+        txtIdAnggota.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtIdAnggotaKeyTyped(evt);
+            }
+        });
+
+        jLabel11.setText("id_reg");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel4)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGap(16, 16, 16)
-                                    .addComponent(jLabel1))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGap(15, 15, 15)
-                                    .addComponent(jLabel3))))
-                        .addGap(30, 30, 30)))
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(lblIdAnggota))
-                        .addGap(0, 265, Short.MAX_VALUE))
-                    .addComponent(txtUangMasuk)
-                    .addComponent(txtUangKeluar))
-                .addContainerGap())
+                            .addComponent(txtUangMasuk)
+                            .addComponent(txtUangKeluar)
+                            .addComponent(txtIdAnggota)
+                            .addComponent(txtIDReg)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(lbNamaUkm)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(lbSaldoAnggota)
+                        .addContainerGap(259, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel11)
+                    .addComponent(txtIDReg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(lblIdAnggota))
+                    .addComponent(txtIdAnggota, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel2))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(lbNamaUkm))
                 .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(lbSaldoAnggota))
+                .addGap(23, 23, 23)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtUangMasuk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(16, 16, 16)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtUangKeluar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addGap(21, 21, 21))
         );
 
-        jLabel5.setText("Out Put");
+        lbReport.setText("Out Put");
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -144,9 +188,9 @@ public class FormMainKhasAnggota extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addGap(16, 16, 16)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -159,8 +203,18 @@ public class FormMainKhasAnggota extends javax.swing.JFrame {
         });
 
         btnClear.setText("Clear");
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearActionPerformed(evt);
+            }
+        });
 
         btnClose.setText("Close");
+        btnClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCloseActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -171,7 +225,7 @@ public class FormMainKhasAnggota extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnSave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnClear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnClose, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE))
+                    .addComponent(btnClose, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -195,22 +249,28 @@ public class FormMainKhasAnggota extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addComponent(jLabel5))
+                            .addComponent(lbReport)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel8))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel8)
+                                        .addGap(369, 369, 369))
+                                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(23, 23, 23)
+                                        .addComponent(jLabel7)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -223,13 +283,13 @@ public class FormMainKhasAnggota extends javax.swing.JFrame {
                     .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel5)
+                .addComponent(lbReport)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -237,9 +297,124 @@ public class FormMainKhasAnggota extends javax.swing.JFrame {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
-
+        int id_reg=Integer.parseInt(txtIDReg.getText());
+        int id_anggota=Integer.parseInt(txtIdAnggota.getText());
+        String nama_ukm=lbNamaUkm.getText();
+        int saldo_Anggota=Integer.parseInt(lbSaldoAnggota.getText());
+        int uang_masuk=Integer.parseInt(txtUangMasuk.getText());
+        int uang_keluar=Integer.parseInt(txtUangKeluar.getText());
+       
+        if(uang_keluar<saldo_Anggota){
+            
+            if(uang_masuk !=0){
+                saldo_Anggota=saldo_Anggota+uang_masuk;
+            }
+            else if(uang_keluar !=0){
+                saldo_Anggota=saldo_Anggota-uang_keluar;
+            }
+            
+            
+            KasAnggota kasAnggota= new KasAnggota(id_reg, id_anggota, nama_ukm, 
+                uang_masuk, uang_keluar, saldo_Anggota);
+            
+            if(btnSave.getText().equals("Save")){
+                if(cka.insertKasAnggota(kasAnggota)){
+                    ca.updateSaldoAAnggota(id_anggota, saldo_Anggota);
+                    lbReport.setText("Success Transaksi");
+                    listTranasaksi(cka.getAllData());
+                    txtIDReg.setText(Integer.toString(cka.getREG()));
+                    clear();
+                }else{
+                    lbReport.setText("Failed Transaksi");
+                }
+            }else{
+                if(cka.updateKasAnggota(kasAnggota)){
+                    lbReport.setText("Success Transaksi");
+                }else{
+                    lbReport.setText("Failed Transaksi");
+                }
+            }
+            
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "Saldo Tidak Cukup");
+        }
+        
+        KasAnggota kasAnggota= new KasAnggota(id_reg, id_anggota, nama_ukm, 
+                uang_masuk, uang_keluar, saldo_Anggota);
+        
+        
+        
     }//GEN-LAST:event_btnSaveActionPerformed
 
+    private void txtIdAnggotaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdAnggotaKeyTyped
+        // TODO add your handling code here:
+        if(evt.getKeyCode()==0){
+            if(!txtIdAnggota.getText().equals("")){
+                
+                try{
+                    int id_anggota=Integer.parseInt(txtIdAnggota.getText().toString());
+                    Anggota a=ca.getOneAnggotaByID(id_anggota);
+                    lbSaldoAnggota.setText(Integer.toString(a.getSaldo_anggota()));
+                }catch(Exception e){
+                    System.err.println("kosong");
+                }
+   
+                /**List<Anggota> list=ca.getIdAnggotaLike(id_anggota);
+                for(Anggota a:list){
+                    lbSaldoAnggota.setText(Integer.toString(a.getSaldo_anggota()));
+                }**/
+            }
+        }
+    }//GEN-LAST:event_txtIdAnggotaKeyTyped
+
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+        // TODO add your handling code here:
+        clear();
+    }//GEN-LAST:event_btnClearActionPerformed
+
+    private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btnCloseActionPerformed
+
+    public void listTranasaksi(List<KasAnggota> list){
+        
+        DefaultTableModel model= new DefaultTableModel();
+        model.setColumnIdentifiers(new String[]{
+        "ID Registrasi",
+        "ID Anggota",
+        "Nama UKM",
+        "Saldo Anggota",
+        "Uang Masuk",
+        "Uang Keluar"
+        });
+        
+        for(KasAnggota ka:list){
+            Object [] ob= new Object[6];
+            ob[0]=ka.getIdreg_anggota();
+            ob[1]=ka.getId_anggota();
+            ob[2]=ka.getNama_ukm();
+            ob[3]=ka.getSaldo_anggota();
+            ob[4]=ka.getUang_masuk();
+            ob[5]=ka.getUang_keluar();
+            model.addRow(ob);
+        }
+        
+        tblKasAnggota.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        tblKasAnggota.setModel(model);
+    }
+    public void clear(){
+        //txtIDReg.setText("");
+        txtIdAnggota.setText("");
+        txtUangKeluar.setText("0");
+        txtUangMasuk.setText("0");
+        //lbNamaUkm.setText("Nama UKM");
+        lbSaldoAnggota.setText("Saldo Anggota");
+    }
+    static Socket s;
+    static ServerSocket ss;
+    static InputStreamReader isr;
+    static BufferedReader br;
     /**
      * @param args the command line arguments
      */
@@ -270,9 +445,29 @@ public class FormMainKhasAnggota extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FormMainKhasAnggota().setVisible(true);
+                new FormMainKhasAnggota("Nama UKM").setVisible(true);
             }
         });
+        
+        //catch value Scanner
+        try{
+                ss= new ServerSocket(6000);
+                while(true){
+                    s= ss.accept();
+                    isr=new InputStreamReader(s.getInputStream());
+                    br= new BufferedReader(isr);
+                    String message=br.readLine();
+                    System.out.println(message);
+                    txtIdAnggota.setText(message);
+                    //txtArea.setText(message);
+                    //br= new BufferedReader(new InputStreamReader(""));
+                   
+                }
+            }
+            catch(IOException e){
+                e.getStackTrace();
+    
+            }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -280,19 +475,23 @@ public class FormMainKhasAnggota extends javax.swing.JFrame {
     private javax.swing.JButton btnClose;
     private javax.swing.JButton btnSave;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblIdAnggota;
+    private javax.swing.JLabel lbNamaUkm;
+    private javax.swing.JLabel lbReport;
+    private javax.swing.JLabel lbSaldoAnggota;
     private javax.swing.JTable tblKasAnggota;
+    private javax.swing.JTextField txtIDReg;
+    private static javax.swing.JTextField txtIdAnggota;
     private javax.swing.JTextField txtUangKeluar;
     private javax.swing.JTextField txtUangMasuk;
     // End of variables declaration//GEN-END:variables

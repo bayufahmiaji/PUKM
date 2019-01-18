@@ -120,8 +120,9 @@ public class QueryAnggota implements InterfaceAnggota {
                     output = new Anggota(
                     rs.getInt(1),rs.getInt(2),rs.getString(3),rs.getString(4),rs.getInt(5), rs.getString(6), rs.getString(7)
                     );
-                    statement.close();
+                
                 }
+                   statement.close();
             }
         }catch (SQLException ex){
             java.util.logging.Logger.getLogger(QueryAnggota.class.getName()).log(Level.SEVERE, null, ex);
@@ -153,4 +154,43 @@ public class QueryAnggota implements InterfaceAnggota {
         } return listAnggota;
     }
     
+    
+    public List<Anggota> getIdAnggotaLike(int id_anggota) {
+        List<Anggota> listAnggota = new ArrayList<>();
+        String sql = "Select * from anggota where id_anggota like '%"+id_anggota+"%'";
+        try {
+            if(SqlConnection.getConnection()==null){
+                return null;
+            } else {
+                PreparedStatement statement = conn.prepareStatement(sql);
+                
+                ResultSet rs = statement.executeQuery();
+                while (rs.next()){
+                    Anggota s = new Anggota(
+                    rs.getInt(1),rs.getInt(2),rs.getString(3),rs.getString(4),rs.getInt(5), rs.getString(6), rs.getString(7)
+                    );
+                    listAnggota.add(s);
+                }
+                statement.close();
+            }
+        }catch (SQLException ex){
+            java.util.logging.Logger.getLogger(QueryAnggota.class.getName()).log(Level.SEVERE, null, ex);
+        } return listAnggota;
+    }
+    
+    public boolean updateSaldoAnggota(int id_anggota,int saldo) {
+        String sql = "Update anggota set saldo_anggota=? where id_anggota=?";
+        try {
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setInt(1, saldo);
+            statement.setInt(2, id_anggota);
+            int row = statement.executeUpdate();
+            if(row > 0 ){
+                return true;
+            } statement.close();
+        } catch (SQLException ex){
+            java.util.logging.Logger.getLogger(QueryAnggota.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
 }
