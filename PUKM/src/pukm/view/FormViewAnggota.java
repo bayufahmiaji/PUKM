@@ -22,7 +22,6 @@ public class FormViewAnggota extends javax.swing.JFrame {
      */
     public FormViewAnggota() {
         initComponents();
-        setTableAnggota(controllerAnggota.getAllAnggota());
     }
 
     public FormViewAnggota(String id, String nama) {
@@ -187,6 +186,11 @@ public class FormViewAnggota extends javax.swing.JFrame {
         });
 
         btnClose.setText("Close");
+        btnClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCloseActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -326,6 +330,7 @@ public class FormViewAnggota extends javax.swing.JFrame {
         if(btnSave.getText().equals("Save")){
             if(controllerAnggota.insertAnggota(data)){
                 lblOutput.setText("Insert Berhasil");
+                new GeneratQrCodeAnggota(id_anggota,nama_anggota,alamat,nama_ukm, jabatan, rootPaneCheckingEnabled).setVisible(true);
             }else{
                 lblOutput.setText("Insert Gagal");
             }
@@ -339,7 +344,7 @@ public class FormViewAnggota extends javax.swing.JFrame {
         }
         setClear();
         
-        new GeneratQrCodeAnggota(id_anggota,nama_anggota,alamat,nama_ukm, jabatan, rootPaneCheckingEnabled).setVisible(true);
+        
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
@@ -388,6 +393,12 @@ public class FormViewAnggota extends javax.swing.JFrame {
             setClear();
         }
     }//GEN-LAST:event_mnDeleteActionPerformed
+
+    private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
+        // TODO add your handling code here:
+        
+        this.dispose();
+    }//GEN-LAST:event_btnCloseActionPerformed
 
     /**
      * @param args the command line arguments
