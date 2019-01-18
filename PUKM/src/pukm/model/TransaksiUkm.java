@@ -17,8 +17,9 @@ public class TransaksiUkm {
     private String detail;
     private int saldo_ukm;
     private int jumlah_pengeluaran;
+    private int jumlah_pemasukan;
     
-    public TransaksiUkm(int id_transaksi, int id_ukm, String nama_ukm,String tanggal,String detail,int saldo_ukm,int jumlah_pengeluaran){
+    public TransaksiUkm(int id_transaksi, int id_ukm, String nama_ukm,String tanggal,String detail,int saldo_ukm,int jumlah_pengeluaran, int jumlah_pemasukan){
         this.id_transaksi = id_transaksi;
         this.id_ukm = id_ukm;
         this.nama_ukm = nama_ukm;
@@ -26,7 +27,8 @@ public class TransaksiUkm {
         this.detail = detail;
         this.saldo_ukm = saldo_ukm;
         this.jumlah_pengeluaran=jumlah_pengeluaran;
-    }
+        this.jumlah_pemasukan = jumlah_pemasukan;
+    }   
 
     /**
      * @return the id_transaksi
@@ -124,6 +126,20 @@ public class TransaksiUkm {
      */
     public void setJumlah_pengeluaran(int jumlah_pengeluaran) {
         this.jumlah_pengeluaran = jumlah_pengeluaran;
+    }
+
+    /**
+     * @return the jumlah_pemasukan
+     */
+    public int getJumlah_pemasukan() {
+        return jumlah_pemasukan;
+    }
+
+    /**
+     * @param jumlah_pemasukan the jumlah_pemasukan to set
+     */
+    public void setJumlah_pemasukan(int jumlah_pemasukan) {
+        this.jumlah_pemasukan = jumlah_pemasukan;
     }
 
 }

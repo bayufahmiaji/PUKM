@@ -151,6 +151,22 @@ public class QueryUkm implements InterfaceUkm{
         
         return ukm;
     }
+    
+    public boolean updateSaldoUKM(int id_ukm,int saldo_ukm) {
+        String sql = "Update ukm set saldo_ukm=? where id_ukm=?";
+        try {
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setInt(1, saldo_ukm);
+            statement.setInt(2, id_ukm);
+            int row = statement.executeUpdate();
+            if(row > 0 ){
+                return true;
+            } statement.close();
+        } catch (SQLException ex){
+            java.util.logging.Logger.getLogger(QueryAnggota.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
 
 
    

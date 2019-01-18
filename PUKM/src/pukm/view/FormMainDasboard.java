@@ -8,6 +8,7 @@ package pukm.view;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.report.ReportPUKM;
 import pukm.controller.ControllerAnggota;
 import pukm.controller.ControllerUkm;
 import pukm.model.Anggota;
@@ -47,7 +48,7 @@ public class FormMainDasboard extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tblAnggota = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
-        jMenuBar1 = new javax.swing.JMenuBar();
+        mnbar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         mnExit = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
@@ -58,6 +59,8 @@ public class FormMainDasboard extends javax.swing.JFrame {
         loginSekretaris = new javax.swing.JMenuItem();
         mnUkm = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -145,7 +148,7 @@ public class FormMainDasboard extends javax.swing.JFrame {
         });
         jMenu1.add(mnExit);
 
-        jMenuBar1.add(jMenu1);
+        mnbar1.add(jMenu1);
 
         jMenu2.setText("Help");
 
@@ -157,7 +160,7 @@ public class FormMainDasboard extends javax.swing.JFrame {
         });
         jMenu2.add(mnAbout);
 
-        jMenuBar1.add(jMenu2);
+        mnbar1.add(jMenu2);
 
         jMenu3.setText("Login");
 
@@ -185,7 +188,7 @@ public class FormMainDasboard extends javax.swing.JFrame {
         });
         jMenu3.add(loginSekretaris);
 
-        jMenuBar1.add(jMenu3);
+        mnbar1.add(jMenu3);
 
         mnUkm.setText("Info");
 
@@ -197,9 +200,21 @@ public class FormMainDasboard extends javax.swing.JFrame {
         });
         mnUkm.add(jMenuItem1);
 
-        jMenuBar1.add(mnUkm);
+        mnbar1.add(mnUkm);
 
-        setJMenuBar(jMenuBar1);
+        jMenu4.setText("Report");
+
+        jMenuItem2.setText("Report Transaksi UKM");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem2);
+
+        mnbar1.add(jMenu4);
+
+        setJMenuBar(mnbar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -273,6 +288,13 @@ public class FormMainDasboard extends javax.swing.JFrame {
         new DialogLogin(login, rootPaneCheckingEnabled).setVisible(true);
         this.dispose();
     }//GEN-LAST:event_loginSekretarisActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        
+        ReportPUKM g = new ReportPUKM();
+        g.GenerateReportTransaksi();
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
      private void setTableUKM(List<Ukm> listUKm){
         if(listUKm==null){
@@ -371,8 +393,9 @@ public class FormMainDasboard extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -383,6 +406,7 @@ public class FormMainDasboard extends javax.swing.JFrame {
     private javax.swing.JMenuItem mnAdmin;
     private javax.swing.JMenuItem mnExit;
     private javax.swing.JMenu mnUkm;
+    private javax.swing.JMenuBar mnbar1;
     private javax.swing.JTable tblAnggota;
     private javax.swing.JTable tblSaldo;
     // End of variables declaration//GEN-END:variables

@@ -39,6 +39,8 @@ public class ControllerUkm {
     public Ukm getDataUkmbyyID(int id_ukm){
         return queryUkm.getDataUkmbyId(id_ukm);
     }
-    
+    public boolean updateSaldoUKM(int id_ukm,int saldo_ukm) {
+        return queryUkm.updateSaldoUKM(id_ukm, saldo_ukm);
+    }
    
 }

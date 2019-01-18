@@ -8,6 +8,7 @@ package pukm.view;
 import java.util.Calendar;
 import javax.swing.JOptionPane;
 import pukm.controller.ControllerTransaksiUkm;
+import pukm.controller.ControllerUkm;
 import pukm.model.TransaksiUkm;
 
 /**
@@ -16,6 +17,7 @@ import pukm.model.TransaksiUkm;
  */
 public class FormViewTransaksiUKM extends javax.swing.JFrame {
     private ControllerTransaksiUkm controllerTransaksi = new ControllerTransaksiUkm();
+    private ControllerUkm cu = new ControllerUkm();
     /**
      * Creates new form FormViewTransaksiUKM
      */
@@ -29,6 +31,8 @@ public class FormViewTransaksiUKM extends javax.swing.JFrame {
          lblIdUkm.setText(id);
          lblNamaUkm.setText(nama);
          lblSaldoUkm.setText(Integer.toString(saldo));
+         txtJumlahPengeluaran.setText("0");
+         txtPemasukan.setText("0");
          initData();
     }
 
@@ -72,6 +76,8 @@ public class FormViewTransaksiUKM extends javax.swing.JFrame {
         btnClose = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtHasil = new javax.swing.JTextArea();
+        jLabel3 = new javax.swing.JLabel();
+        txtPemasukan = new javax.swing.JTextField();
 
         jLabel16.setText("Nama");
 
@@ -125,7 +131,7 @@ public class FormViewTransaksiUKM extends javax.swing.JFrame {
 
         lblSaldoUkm.setText("saldo_ukm");
 
-        jLabel26.setText("Detail Pengeluaran");
+        jLabel26.setText("Detail Transaksi");
 
         jLabel27.setText(":");
 
@@ -172,76 +178,78 @@ public class FormViewTransaksiUKM extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(txtHasil);
 
+        jLabel3.setText("Jumlah Pemasukan     :");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addComponent(btnSimpan, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
-                        .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)
-                        .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 28, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel4)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel9)))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblTanggal)
+                                    .addComponent(lblIdTransaksi)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel23)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel20)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel17)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addGap(61, 61, 61)
+                                            .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblIdUkm)
+                                    .addComponent(lblNamaUkm)
+                                    .addComponent(lblSaldoUkm)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(33, 33, 33)
+                                .addComponent(btnSimpan, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(27, 27, 27)
+                                .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(32, 32, 32)
+                                .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel30)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblSisa))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jLabel4)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(jLabel2)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(jLabel9)))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lblTanggal)
-                                            .addComponent(lblIdTransaksi)))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                                .addComponent(jLabel23)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jLabel24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                                .addComponent(jLabel20)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jLabel17)
-                                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                                    .addGap(61, 61, 61)
-                                                    .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lblIdUkm)
-                                            .addComponent(lblNamaUkm)
-                                            .addComponent(lblSaldoUkm)))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel30)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(lblSisa))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                                .addComponent(jLabel28)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jLabel29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                                .addComponent(jLabel26)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jLabel27)))
-                                        .addGap(39, 39, 39)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(txtDetailPengeluaran, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
-                                            .addComponent(txtJumlahPengeluaran))))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                            .addComponent(jLabel28)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(jLabel29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                            .addComponent(jLabel26)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(jLabel27)))
+                                    .addComponent(jLabel3))
+                                .addGap(39, 39, 39)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtDetailPengeluaran)
+                                    .addComponent(txtJumlahPengeluaran)
+                                    .addComponent(txtPemasukan, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -281,7 +289,11 @@ public class FormViewTransaksiUKM extends javax.swing.JFrame {
                     .addComponent(jLabel28)
                     .addComponent(jLabel29)
                     .addComponent(txtJumlahPengeluaran, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41)
+                .addGap(22, 22, 22)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtPemasukan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel30)
                     .addComponent(lblSisa))
@@ -290,9 +302,9 @@ public class FormViewTransaksiUKM extends javax.swing.JFrame {
                     .addComponent(btnSimpan)
                     .addComponent(btnClear)
                     .addComponent(btnClose))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
+                .addGap(12, 12, 12))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -301,7 +313,7 @@ public class FormViewTransaksiUKM extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel1)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 410, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -327,11 +339,23 @@ public class FormViewTransaksiUKM extends javax.swing.JFrame {
         int saldo_ukm = Integer.parseInt(lblSaldoUkm.getText());
         String detail = txtDetailPengeluaran.getText();
         int pengeluaran = Integer.parseInt(txtJumlahPengeluaran.getText());
-        int sisa_saldo = Integer.parseInt(lblSisa.getText());
+        int pemasukan = Integer.parseInt(txtPemasukan.getText());
+       
         int hasil = saldo_ukm - pengeluaran;
-        TransaksiUkm transaksi = new TransaksiUkm(id_transaksi, id_ukm, nama_ukm, tanggal, detail, hasil,pengeluaran);
+        TransaksiUkm transaksi = new TransaksiUkm(id_transaksi, id_ukm, nama_ukm, tanggal, detail, hasil,pengeluaran,pemasukan);
+        
+        if(pengeluaran<saldo_ukm){
+            
+            if(pemasukan !=0){
+                saldo_ukm=saldo_ukm+pemasukan;
+            }
+            else if(pengeluaran !=0){
+                saldo_ukm=saldo_ukm-pengeluaran;
+            }
+        
         if(btnSimpan.getText().equals("Simpan")){
             if(controllerTransaksi.insertTransaksi(transaksi)){
+                cu.updateSaldoUKM(id_ukm, saldo_ukm);
                 txtHasil.setText("ID Transaksi : "+transaksi.getId_transaksi()+"\nID UKM : "+transaksi.getId_ukm()+
                         "\nNama UKM : " + transaksi.getNama_ukm()+"\nTanggal : "+transaksi.getTanggal()+
                         "\nDetail Pengeluaran : "+ transaksi.getDetail()+"\n Jumlah Pengeluaran : "+pengeluaran+
@@ -343,6 +367,25 @@ public class FormViewTransaksiUKM extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Update Berhasil");
             }
         }
+        }else {
+                JOptionPane.showMessageDialog(rootPane, "Saldo Tidak Cukup");
+        
+        }
+        txtHasil.setText(nama_ukm);
+        /**txtHasil.setText("===================================================\n"+
+                         "Id Transaksi : "+id_transaksi
+                        +"\nTanggal      : "+tanggal
+                        +"\n==================================================="
+                        +"\nId Ukm       :"+id_ukm
+                        +"\nNama Ukm     :"+nama_ukm
+                        +"\nSaldo Masuk  :"+pemasukan
+                        +"\nSaldo Keluar :"+pengeluaran
+                        +"\nTotal Saldo  :"+lblSaldoUkm.getText()
+                        +"\n==================================================="
+                        +"\nSisa Saldo   :"+saldo_ukm
+                        +"\n===================================================");
+        **/
+        lblSisa.setText(String.valueOf(saldo_ukm));
         setClear();
     }//GEN-LAST:event_btnSimpanActionPerformed
 
@@ -372,18 +415,19 @@ public class FormViewTransaksiUKM extends javax.swing.JFrame {
     
     public void setClear(){
         Calendar c = Calendar.getInstance();
-        String date = c.get(Calendar.YEAR) +"/"+ c.get(Calendar.MONTH) +"/"+ c.get(Calendar.DATE);
+        String date = c.get(Calendar.YEAR) +"/"+ (c.get(Calendar.MONTH)+1) +"/"+ c.get(Calendar.DATE);
         lblTanggal.setText(date);
         lblIdTransaksi.setText(controllerTransaksi.generateID()+"");
         txtDetailPengeluaran.setText("");
-        txtJumlahPengeluaran.setText("");
         lblSisa.setText("saldo");
         txtHasil.setText("");
+        txtJumlahPengeluaran.setText("0");
+        txtPemasukan.setText("0");
     }
     
     public void initData(){
         Calendar c = Calendar.getInstance();
-        String date = c.get(Calendar.YEAR) +"/"+ c.get(Calendar.MONTH) +"/"+ c.get(Calendar.DATE);
+        String date = c.get(Calendar.YEAR) +"/"+ (c.get(Calendar.MONTH)+1) +"/"+ c.get(Calendar.DATE);
         lblTanggal.setText(date);
         lblIdTransaksi.setText(controllerTransaksi.generateID()+"");
     }
@@ -438,6 +482,7 @@ public class FormViewTransaksiUKM extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel9;
@@ -452,5 +497,6 @@ public class FormViewTransaksiUKM extends javax.swing.JFrame {
     private javax.swing.JTextField txtDetailPengeluaran;
     private javax.swing.JTextArea txtHasil;
     private javax.swing.JTextField txtJumlahPengeluaran;
+    private javax.swing.JTextField txtPemasukan;
     // End of variables declaration//GEN-END:variables
 }

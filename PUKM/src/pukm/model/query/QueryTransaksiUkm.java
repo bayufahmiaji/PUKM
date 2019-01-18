@@ -24,7 +24,7 @@ public class QueryTransaksiUkm implements InterfaceTransaksiUkm {
     private Connection conn = SqlConnection.getConnection();
     @Override
     public boolean insert(TransaksiUkm data) {
-        String sql = "Insert Into detail_transaksi values (?,?,?,?,?,?,?)";
+        String sql = "Insert Into detail_transaksi values (?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement statement = conn.prepareStatement(sql);
             
@@ -35,6 +35,7 @@ public class QueryTransaksiUkm implements InterfaceTransaksiUkm {
             statement.setString(5, data.getDetail());
             statement.setInt(6, data.getSaldo_ukm());
             statement.setInt(7, data.getJumlah_pengeluaran());
+            statement.setInt(8, data.getJumlah_pemasukan());
             int row = statement.executeUpdate();
             if(row > 0 ){
                 return true;
@@ -94,7 +95,7 @@ public class QueryTransaksiUkm implements InterfaceTransaksiUkm {
                 ResultSet rs = statement.executeQuery();
                 while (rs.next()){
                     TransaksiUkm k = new TransaksiUkm(
-                    rs.getInt(1),rs.getInt(2),rs.getString(3),rs.getString(4),rs.getString(5), rs.getInt(6),rs.getInt(7)
+                    rs.getInt(1),rs.getInt(2),rs.getString(3),rs.getString(4),rs.getString(5), rs.getInt(6),rs.getInt(7),rs.getInt(0)
                     );
                     listTransaksiUkm.add(k);
                 }
@@ -119,7 +120,7 @@ public class QueryTransaksiUkm implements InterfaceTransaksiUkm {
                 ResultSet rs = statement.executeQuery();
                 while (rs.next()){
                     output = new TransaksiUkm(
-                    rs.getInt(1),rs.getInt(2),rs.getString(3),rs.getString(4),rs.getString(5), rs.getInt(6),rs.getInt(7)
+                    rs.getInt(1),rs.getInt(2),rs.getString(3),rs.getString(4),rs.getString(5), rs.getInt(6),rs.getInt(7), rs.getInt(8)
                     );
                     statement.close();
                 }
@@ -162,7 +163,7 @@ public class QueryTransaksiUkm implements InterfaceTransaksiUkm {
                 ResultSet rs = statement.executeQuery();
                 while (rs.next()){
                     output = new TransaksiUkm(
-                    rs.getInt(1),rs.getInt(2),rs.getString(3),rs.getString(4),rs.getString(5), rs.getInt(6),rs.getInt(7)
+                    rs.getInt(1),rs.getInt(2),rs.getString(3),rs.getString(4),rs.getString(5), rs.getInt(6),rs.getInt(7),rs.getInt(8)
                     );
                     statement.close();
                 }

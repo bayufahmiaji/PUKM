@@ -43,4 +43,6 @@ public class ControllerTransaksiUkm {
     public TransaksiUkm getSaldo(int saldo){
         return queryTransaksiUkm.getSaldo(saldo);
     }
+    
+    
 }
