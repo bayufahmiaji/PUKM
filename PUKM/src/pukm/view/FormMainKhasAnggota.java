@@ -11,6 +11,8 @@ import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import pukm.controller.ControllerAnggota;
@@ -18,6 +20,7 @@ import pukm.controller.ControllerKasAnggota;
 import pukm.model.Anggota;
 import pukm.model.KasAnggota;
 import pukm.model.query.QueryAnggota;
+
 
 /**
  *
@@ -41,13 +44,15 @@ public class FormMainKhasAnggota extends javax.swing.JFrame {
         txtIDReg.setText(Integer.toString(cka.getREG()));
         txtIdAnggota.setText(Integer.toString(id));
         nama_ukm=nama_ukm;
-        //cek();
+        cek();
     }
     
     public void cek(){
-        try{
-                ss= new ServerSocket(6000);
-                while(true){
+        Thread a= new Thread(){
+            public void run(){
+                    try{
+                    ss= new ServerSocket(6000);
+                    while(true){
                     s= ss.accept();
                     isr=new InputStreamReader(s.getInputStream());
                     br= new BufferedReader(isr);
@@ -57,12 +62,23 @@ public class FormMainKhasAnggota extends javax.swing.JFrame {
                     //txtArea.setText(message);
                     //br= new BufferedReader(new InputStreamReader(""));
                    
-                }
-            }
-            catch(IOException e){
-                e.getStackTrace();
+                    }
+                    }
+                    catch(IOException e){
+                    e.getStackTrace();
     
+                    }
+                
+            try{
+                sleep(1000);
             }
+            catch(InterruptedException e){
+                Logger.getLogger(FormMainKhasAnggota.class.getName()).log(Level.SEVERE,null,e);
+            }
+            
+            }
+        };
+        a.start();
     }
 
     /**
@@ -95,11 +111,10 @@ public class FormMainKhasAnggota extends javax.swing.JFrame {
         btnSave = new javax.swing.JButton();
         btnClear = new javax.swing.JButton();
         btnClose = new javax.swing.JButton();
-        Scaner = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -242,13 +257,6 @@ public class FormMainKhasAnggota extends javax.swing.JFrame {
             }
         });
 
-        Scaner.setText("Use Scanner");
-        Scaner.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ScanerActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -258,8 +266,7 @@ public class FormMainKhasAnggota extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnSave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnClear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnClose, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
-                    .addComponent(Scaner, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnClose, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -271,8 +278,6 @@ public class FormMainKhasAnggota extends javax.swing.JFrame {
                 .addComponent(btnClear)
                 .addGap(32, 32, 32)
                 .addComponent(btnClose)
-                .addGap(30, 30, 30)
-                .addComponent(Scaner)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -412,11 +417,6 @@ public class FormMainKhasAnggota extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnCloseActionPerformed
 
-    private void ScanerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ScanerActionPerformed
-        // TODO add your handling code here:
-        new ScaneDialog(this, rootPaneCheckingEnabled, namaukm).setVisible(true);
-    }//GEN-LAST:event_ScanerActionPerformed
-
     public void listTranasaksi(List<KasAnggota> list){
         
         DefaultTableModel model= new DefaultTableModel();
@@ -511,7 +511,6 @@ public class FormMainKhasAnggota extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Scaner;
     private javax.swing.JButton btnClear;
     private javax.swing.JButton btnClose;
     private javax.swing.JButton btnSave;
