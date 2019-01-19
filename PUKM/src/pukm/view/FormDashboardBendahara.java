@@ -29,8 +29,8 @@ public class FormDashboardBendahara extends javax.swing.JFrame {
         lbIdUkm.setText(id_ukm);
         lbNamaUkm.setText(nama_ukm);
         lbSaldoUkm.setText(Integer.toString(saldo));
-        setTableTransaksi(controllerTransaksi.getAllTransaksiUkm());
-        setTableKasAnggota(cka.getAllData());
+        setTableTransaksi(controllerTransaksi.getAllAnggotaByUKM(nama_ukm));
+        setTableKasAnggota(cka.getAllAnggotaByUKM(nama_ukm));
     }
 
     /**
@@ -372,8 +372,8 @@ public class FormDashboardBendahara extends javax.swing.JFrame {
                     o[5] = a.getSaldo_anggota();
                     tableModel.addRow(o);
             }
-                tblTransaksi.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
-                tblTransaksi.setModel(tableModel);
+                tblKasAnggota.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+                tblKasAnggota.setModel(tableModel);
         }
         }
     

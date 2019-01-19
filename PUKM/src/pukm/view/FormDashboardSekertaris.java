@@ -26,7 +26,7 @@ public class FormDashboardSekertaris extends javax.swing.JFrame {
         lbUserName.setText(user);
         lbIdUkm.setText(id_ukm);
         lbNamaUKM.setText(nama_ukm);
-        setTableAnggota(controllerAnggota.getAllAnggota());
+        setTableAnggota(controllerAnggota.getAllAnggotaByUKM(nama_ukm));
     }
 
     /**

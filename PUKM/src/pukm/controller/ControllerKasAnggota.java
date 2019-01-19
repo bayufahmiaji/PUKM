@@ -37,4 +37,8 @@ public class ControllerKasAnggota {
     public int getREG(){
     return qka.genIDReg();
     }
+    
+    public List<KasAnggota> getAllAnggotaByUKM(String nama_ukm){
+        return qka.getAllAnggotaByUKM(nama_ukm);
+    }
 }

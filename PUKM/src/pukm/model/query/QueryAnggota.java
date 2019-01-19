@@ -127,8 +127,8 @@ public class QueryAnggota implements InterfaceAnggota {
             }
         }catch (SQLException ex){
             java.util.logging.Logger.getLogger(QueryAnggota.class.getName()).log(Level.SEVERE, null, ex);
-        } return output;
-        
+        } 
+    return output;
     }
 
     @Override
@@ -211,4 +211,27 @@ public class QueryAnggota implements InterfaceAnggota {
             return id_anggota;
 
         }
+    public List<Anggota> getAllAnggotaByUKM(String nama_ukm) {
+        List<Anggota> listAnggota = new ArrayList<>();
+        String sql = "Select * from anggota where nama_ukm like '%"+nama_ukm+"%'";
+        try {
+            if(SqlConnection.getConnection()==null){
+                return null;
+            } else {
+                PreparedStatement statement = conn.prepareStatement(sql);
+                
+                ResultSet rs = statement.executeQuery();
+                while (rs.next()){
+                    Anggota s = new Anggota(
+                    rs.getInt(1),rs.getInt(2),rs.getString(3),rs.getString(4),rs.getInt(5), rs.getString(6), rs.getString(7)
+                    );
+                    listAnggota.add(s);
+                }
+                statement.close();
+            }
+        }catch (SQLException ex){
+            java.util.logging.Logger.getLogger(QueryAnggota.class.getName()).log(Level.SEVERE, null, ex);
+        } return listAnggota;
+    }
+
 }

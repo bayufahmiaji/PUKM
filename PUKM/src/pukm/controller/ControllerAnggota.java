@@ -50,4 +50,8 @@ public class ControllerAnggota {
     public int HitungAngggota(){
         return queryAnggota.HitungAnggota();
     }
+    public List<Anggota> getAllAnggotaByUKM(String nama_ukm){
+        return queryAnggota.getAllAnggotaByUKM(nama_ukm);
+    }
+
 }

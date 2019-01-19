@@ -188,5 +188,30 @@ public class QueryKasAnggota implements InterfacesKasAnggota{
         
         return reg;
     }
-    
+    public List<KasAnggota> getAllAnggotaByUKM(String nama_ukm) {
+        List<KasAnggota> listAnggota = new ArrayList<>();
+        String sql = "Select * from kas_anggota where nama_ukm like '%"+nama_ukm+"%'";
+        try {
+            if(SqlConnection.getConnection()==null){
+                return null;
+            } else {
+                PreparedStatement statement = conn.prepareStatement(sql);
+                
+                ResultSet rs = statement.executeQuery();
+                while (rs.next()){
+                    KasAnggota s = new KasAnggota( 
+                            rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getString(3),
+                        rs.getInt(4), 
+                        rs.getInt(5),
+                        rs.getInt(6));
+                    listAnggota.add(s);
+                }
+                statement.close();
+            }
+        }catch (SQLException ex){
+            java.util.logging.Logger.getLogger(QueryKasUKM.class.getName()).log(Level.SEVERE, null, ex);
+        } return listAnggota;
+    }
 }

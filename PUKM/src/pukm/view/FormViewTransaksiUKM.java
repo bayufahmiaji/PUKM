@@ -380,6 +380,8 @@ public class FormViewTransaksiUKM extends javax.swing.JFrame {
                         +"\n==================================================="
                         +"\nSisa Saldo   :"+saldo_ukm
                         +"\n===================================================");
+        lblSaldoUkm.setText(String.valueOf(saldo_ukm));
+        lblSisa.setText(String.valueOf(saldo_ukm));
         
         setClear();
     }//GEN-LAST:event_btnSimpanActionPerformed

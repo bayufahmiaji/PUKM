@@ -43,6 +43,8 @@ public class ControllerTransaksiUkm {
     public TransaksiUkm getSaldo(int saldo){
         return queryTransaksiUkm.getSaldo(saldo);
     }
-    
+     public List<TransaksiUkm> getAllAnggotaByUKM(String nama_ukm){
+         return queryTransaksiUkm.getAllAnggotaByUKM(nama_ukm);
+     }
     
 }

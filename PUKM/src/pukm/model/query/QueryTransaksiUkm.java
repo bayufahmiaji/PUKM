@@ -173,4 +173,24 @@ public class QueryTransaksiUkm implements InterfaceTransaksiUkm {
         } return output;
     }
     
+    public List<TransaksiUkm> getAllAnggotaByUKM(String nama_ukm) {
+        List<TransaksiUkm> listAnggota = new ArrayList<>();
+        String sql = "Select * from detail_transaksi where nama_ukm like '%"+nama_ukm+"%'";
+        try {
+            if(SqlConnection.getConnection()==null){
+                return null;
+            } else {
+                PreparedStatement statement = conn.prepareStatement(sql);
+                
+                ResultSet rs = statement.executeQuery();
+                while (rs.next()){
+                    TransaksiUkm s = new TransaksiUkm(rs.getInt(1),rs.getInt(2),rs.getString(3),rs.getString(4),rs.getString(5), rs.getInt(6),rs.getInt(7),rs.getInt(8));
+                    listAnggota.add(s);
+                }
+                statement.close();
+            }
+        }catch (SQLException ex){
+            java.util.logging.Logger.getLogger(QueryTransaksiUkm.class.getName()).log(Level.SEVERE, null, ex);
+        } return listAnggota;
+    }
 }
