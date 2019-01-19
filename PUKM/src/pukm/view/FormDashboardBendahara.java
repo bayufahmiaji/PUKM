@@ -5,8 +5,13 @@
  */
 package pukm.view;
 
+import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import pukm.controller.ControllerKasAnggota;
 import pukm.controller.ControllerTransaksiUkm;
+import pukm.model.KasAnggota;
+import pukm.model.TransaksiUkm;
 
 /**
  *
@@ -14,6 +19,7 @@ import pukm.controller.ControllerTransaksiUkm;
  */
 public class FormDashboardBendahara extends javax.swing.JFrame {
     private ControllerTransaksiUkm controllerTransaksi = new ControllerTransaksiUkm();
+    private ControllerKasAnggota cka = new ControllerKasAnggota();
     /**
      * Creates new form FormDashboardSekertaris
      */
@@ -23,6 +29,8 @@ public class FormDashboardBendahara extends javax.swing.JFrame {
         lbIdUkm.setText(id_ukm);
         lbNamaUkm.setText(nama_ukm);
         lbSaldoUkm.setText(Integer.toString(saldo));
+        setTableTransaksi(controllerTransaksi.getAllTransaksiUkm());
+        setTableKasAnggota(cka.getAllData());
     }
 
     /**
@@ -45,7 +53,7 @@ public class FormDashboardBendahara extends javax.swing.JFrame {
         lbSaldoUkm = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblkasUKM = new javax.swing.JTable();
+        tblTransaksi = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -56,7 +64,6 @@ public class FormDashboardBendahara extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        mnAnggota = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -122,16 +129,16 @@ public class FormDashboardBendahara extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(lbNamaUkm))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(lbSaldoUkm))
-                .addContainerGap(7, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        tblkasUKM.setModel(new javax.swing.table.DefaultTableModel(
+        tblTransaksi.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -142,7 +149,7 @@ public class FormDashboardBendahara extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(tblkasUKM);
+        jScrollPane1.setViewportView(tblTransaksi);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -155,16 +162,16 @@ public class FormDashboardBendahara extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(53, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(85, Short.MAX_VALUE))
         );
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel7.setText("DATA UANG KAS");
 
-        jLabel8.setText("Uang Kas UKM");
+        jLabel8.setText("Transaksi UKM");
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -213,9 +220,6 @@ public class FormDashboardBendahara extends javax.swing.JFrame {
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Master Bendahara");
-
-        mnAnggota.setText("Add Uang Kas UKM");
-        jMenu2.add(mnAnggota);
 
         jMenuItem1.setText("Add Uang Kas Anggota");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -274,8 +278,8 @@ public class FormDashboardBendahara extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel9)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -305,7 +309,74 @@ public class FormDashboardBendahara extends javax.swing.JFrame {
         String nama_ukm= lbNamaUkm.getText();
         new FormMainKhasAnggota(nama_ukm,0).setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+        private void setTableTransaksi(List<TransaksiUkm> listUKm){
+            if(listUKm==null){
+                JOptionPane.showMessageDialog(this,"Data UKM Gagal Diambil Dari Database",
+                        "DATABASE FAILED",JOptionPane.ERROR_MESSAGE);
+            }else{
+                //setting table TRansaksi
+                DefaultTableModel tableModel = new DefaultTableModel();
+                tableModel.setColumnIdentifiers(new String[]{
+                    "Id Transaksi",
+                    "Id UKM",
+                    "Nama UKM",
+                    "Tanggal",
+                    "Detail Transaksi",
+                    "Saldo UKM",
+                    "Jumlah Pengeluaran",
+                    "Jumlah Pemasukan"
+                });
 
+                //mengambil data untuk table Transaksi UKM
+                for(TransaksiUkm a : listUKm){
+                    Object[] o = new Object[8];
+                    o[0] = a.getId_transaksi();
+                    o[1] = a.getId_ukm();
+                    o[2] = a.getNama_ukm();
+                    o[3] = a.getTanggal();
+                    o[4] = a.getDetail();
+                    o[5] = a.getSaldo_ukm();
+                    o[6] = a.getJumlah_pengeluaran();
+                    o[7] = a.getJumlah_pemasukan();
+                    tableModel.addRow(o);
+            }
+                tblTransaksi.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+                tblTransaksi.setModel(tableModel);
+        }
+        }
+        
+        private void setTableKasAnggota(List<KasAnggota> listUKm){
+            if(listUKm==null){
+                JOptionPane.showMessageDialog(this,"Data UKM Gagal Diambil Dari Database",
+                        "DATABASE FAILED",JOptionPane.ERROR_MESSAGE);
+            }else{
+                //setting table TRansaksi
+                DefaultTableModel tableModel = new DefaultTableModel();
+                tableModel.setColumnIdentifiers(new String[]{
+                    "Id Registrasi",
+                    "Id Anggota",
+                    "Nama UKM",
+                    "Uang Masuk",
+                    "Uang Keluar",
+                    "Saldo Abggota"
+                });
+
+                //mengambil data untuk table Transaksi UKM
+                for(KasAnggota a : listUKm){
+                    Object[] o = new Object[6];
+                    o[0] = a.getId_anggota();
+                    o[1] = a.getId_anggota();
+                    o[2] = a.getNama_ukm();
+                    o[3] = a.getUang_masuk();
+                    o[4] = a.getUang_keluar();
+                    o[5] = a.getSaldo_anggota();
+                    tableModel.addRow(o);
+            }
+                tblTransaksi.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+                tblTransaksi.setModel(tableModel);
+        }
+        }
+    
     /**
      * @param args the command line arguments
      */
@@ -366,8 +437,7 @@ public class FormDashboardBendahara extends javax.swing.JFrame {
     private javax.swing.JLabel lbNamaUkm;
     private javax.swing.JLabel lbSaldoUkm;
     private javax.swing.JLabel lbUsername;
-    private javax.swing.JMenuItem mnAnggota;
     private javax.swing.JTable tblKasAnggota;
-    private javax.swing.JTable tblkasUKM;
+    private javax.swing.JTable tblTransaksi;
     // End of variables declaration//GEN-END:variables
 }

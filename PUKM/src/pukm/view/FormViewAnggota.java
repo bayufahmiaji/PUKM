@@ -442,8 +442,6 @@ public class FormViewAnggota extends javax.swing.JFrame {
         txtNamaAnggota.setText("");
         txtAlamat.setText("");
         txtSaldo.setText("");
-        lblIdUkm.setText("id_ukm");
-        lblNamaUkm.setText("nama_ukm");
         txtJabatan.setText("");
         setTableAnggota(controllerAnggota.getAllAnggota());
     }

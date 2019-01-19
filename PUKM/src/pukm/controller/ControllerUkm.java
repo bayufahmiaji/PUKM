@@ -42,5 +42,7 @@ public class ControllerUkm {
     public boolean updateSaldoUKM(int id_ukm,int saldo_ukm) {
         return queryUkm.updateSaldoUKM(id_ukm, saldo_ukm);
     }
-   
+    public int HitungUKM(){
+        return queryUkm.HitungUKM();
+    }
 }

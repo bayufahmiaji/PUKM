@@ -303,7 +303,7 @@ public class FormViewTransaksiUKM extends javax.swing.JFrame {
                     .addComponent(btnClear)
                     .addComponent(btnClose))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
                 .addGap(12, 12, 12))
         );
 
@@ -313,7 +313,7 @@ public class FormViewTransaksiUKM extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel1)
-                .addGap(0, 410, Short.MAX_VALUE))
+                .addGap(0, 411, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -356,10 +356,6 @@ public class FormViewTransaksiUKM extends javax.swing.JFrame {
         if(btnSimpan.getText().equals("Simpan")){
             if(controllerTransaksi.insertTransaksi(transaksi)){
                 cu.updateSaldoUKM(id_ukm, saldo_ukm);
-                txtHasil.setText("ID Transaksi : "+transaksi.getId_transaksi()+"\nID UKM : "+transaksi.getId_ukm()+
-                        "\nNama UKM : " + transaksi.getNama_ukm()+"\nTanggal : "+transaksi.getTanggal()+
-                        "\nDetail Pengeluaran : "+ transaksi.getDetail()+"\n Jumlah Pengeluaran : "+pengeluaran+
-                        "\nSisa Saldo Saat Ini : "+transaksi.getSaldo_ukm());
                 lblSisa.setText(Integer.toString(hasil));
             }
         } else {
@@ -385,7 +381,6 @@ public class FormViewTransaksiUKM extends javax.swing.JFrame {
                         +"\nSisa Saldo   :"+saldo_ukm
                         +"\n===================================================");
         
-        lblSisa.setText(String.valueOf(saldo_ukm));
         setClear();
     }//GEN-LAST:event_btnSimpanActionPerformed
 
@@ -419,8 +414,6 @@ public class FormViewTransaksiUKM extends javax.swing.JFrame {
         lblTanggal.setText(date);
         lblIdTransaksi.setText(controllerTransaksi.generateID()+"");
         txtDetailPengeluaran.setText("");
-        lblSisa.setText("saldo");
-        txtHasil.setText("");
         txtJumlahPengeluaran.setText("0");
         txtPemasukan.setText("0");
     }

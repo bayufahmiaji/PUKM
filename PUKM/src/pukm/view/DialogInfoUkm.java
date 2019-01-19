@@ -8,19 +8,24 @@ package pukm.view;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import pukm.controller.ControllerAnggota;
+import pukm.controller.ControllerUkm;
 
 /**
  *
  * @author AdittyaS
  */
 public class DialogInfoUkm extends javax.swing.JDialog {
-    
+    private ControllerUkm cu = new ControllerUkm();
+    private ControllerAnggota ca = new ControllerAnggota();
     /**
      * Creates new form DialogInfoUkmnn
      */
     public DialogInfoUkm(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        lblUKM.setText(cu.HitungUKM()+"");
+        lblJumlah.setText(ca.HitungAngggota()+"");
     }
 
     /**
@@ -58,7 +63,7 @@ public class DialogInfoUkm extends javax.swing.JDialog {
         });
 
         lblJumlah.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        lblJumlah.setText("Sekian");
+        lblJumlah.setText("Anggota");
 
         lblUKM.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lblUKM.setText("UKM");
@@ -67,7 +72,7 @@ public class DialogInfoUkm extends javax.swing.JDialog {
         jLabel3.setText(" ");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jLabel5.setText("Dari");
+        jLabel5.setText("UKM");
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel6.setText("Anggota Keseluruhan UKM");
@@ -94,12 +99,15 @@ public class DialogInfoUkm extends javax.swing.JDialog {
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(lblJumlah))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblUKM)
-                            .addComponent(jLabel6)))
+                            .addComponent(lblJumlah))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(17, 17, 17)
+                                .addComponent(jLabel6))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel5))))
                     .addComponent(jLabel7))
                 .addContainerGap(69, Short.MAX_VALUE))
         );
@@ -113,13 +121,13 @@ public class DialogInfoUkm extends javax.swing.JDialog {
                 .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(lblJumlah)
-                    .addComponent(lblUKM))
+                    .addComponent(lblUKM)
+                    .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6))
+                    .addComponent(jLabel6)
+                    .addComponent(lblJumlah))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
                 .addComponent(jLabel7)
                 .addContainerGap())

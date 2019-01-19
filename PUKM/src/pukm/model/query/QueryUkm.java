@@ -167,7 +167,23 @@ public class QueryUkm implements InterfaceUkm{
         }
         return false;
     }
+    public int HitungUKM() {
+        int id_ukm = 0;
+            String sql = "EXEC HitungUKM";
+            try{
+                PreparedStatement statement = conn.prepareStatement(sql);
 
+                ResultSet rs = statement.executeQuery();
+                while(rs.next()){
+                    id_ukm = rs.getInt(1);
+                }
+                statement.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(QueryUkm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return id_ukm;
+
+        }
 
    
     

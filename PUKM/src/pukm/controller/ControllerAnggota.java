@@ -47,4 +47,7 @@ public class ControllerAnggota {
     public boolean updateSaldoAAnggota(int id_anggota,int saldo){
         return queryAnggota.updateSaldoAnggota(id_anggota, saldo);
     }
+    public int HitungAngggota(){
+        return queryAnggota.HitungAnggota();
+    }
 }

@@ -95,7 +95,7 @@ public class QueryTransaksiUkm implements InterfaceTransaksiUkm {
                 ResultSet rs = statement.executeQuery();
                 while (rs.next()){
                     TransaksiUkm k = new TransaksiUkm(
-                    rs.getInt(1),rs.getInt(2),rs.getString(3),rs.getString(4),rs.getString(5), rs.getInt(6),rs.getInt(7),rs.getInt(0)
+                    rs.getInt(1),rs.getInt(2),rs.getString(3),rs.getString(4),rs.getString(5), rs.getInt(6),rs.getInt(7),rs.getInt(8)
                     );
                     listTransaksiUkm.add(k);
                 }

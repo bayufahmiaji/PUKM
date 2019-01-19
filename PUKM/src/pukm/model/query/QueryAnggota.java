@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 import pukm.connection.SqlConnection;
 import pukm.model.Anggota;
 import pukm.model.interfaces.InterfaceAnggota;
@@ -193,4 +194,21 @@ public class QueryAnggota implements InterfaceAnggota {
         }
         return false;
     }
+    public int HitungAnggota() {
+        int id_anggota = 0;
+            String sql = "EXEC HitungAnggota";
+            try{
+                PreparedStatement statement = conn.prepareStatement(sql);
+
+                ResultSet rs = statement.executeQuery();
+                while(rs.next()){
+                    id_anggota = rs.getInt(1);
+                }
+                statement.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(QueryAnggota.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return id_anggota;
+
+        }
 }
